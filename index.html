@@ -1,6 +1,9 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -9,34 +12,44 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
+
 body{
     background:#f5f7fa;
 }
 
 .main-box{
     background:white;
-    padding:30px;
+    padding:35px;
     margin-top:30px;
     margin-bottom:30px;
-    border-radius:10px;
-    box-shadow:0 0 15px rgba(0,0,0,.1);
-}
-
-.alerta{
-    background:#fff3cd;
-    border-left:5px solid #ff9800;
-    padding:15px;
-    margin-bottom:20px;
+    border-radius:12px;
+    box-shadow:0 0 20px rgba(0,0,0,.08);
 }
 
 h1{
     color:#003366;
+    font-weight:700;
+}
+
+.alerta-urgencia{
+    background:#fff3cd;
+    border-left:6px solid #ff9800;
+    padding:18px;
+    border-radius:6px;
 }
 
 .btn-enviar{
     background:#003366;
     color:white;
+    border:none;
+    padding:12px 25px;
 }
+
+.btn-enviar:hover{
+    background:#002244;
+    color:white;
+}
+
 </style>
 
 </head>
@@ -49,15 +62,15 @@ h1{
 
 <h1>Dr. Daniel Zuin</h1>
 
-<h4>Formulario de Contacto</h4>
+<h4 class="mb-4">Formulario de Contacto</h4>
 
-<div class="alerta">
+<div class="alerta-urgencia mb-4">
 
-<strong>IMPORTANTE</strong>
+<h5><strong>⚠️ IMPORTANTE</strong></h5>
 
-<p class="mt-2">
+<p class="mb-0">
 
-Si usted presenta una urgencia o emergencia médica, no utilice este formulario.
+Si usted presenta una urgencia o emergencia médica, NO utilice este formulario.
 
 Solicite atención médica inmediata, comuníquese con los servicios de emergencia o concurra a la guardia hospitalaria más cercana.
 
@@ -68,15 +81,19 @@ Este canal no está destinado a la atención de urgencias o emergencias médicas
 </div>
 
 <p>
-Las consultas serán respondidas dentro de un plazo estimado de al menos 72 horas hábiles.
+
+Este formulario está destinado exclusivamente a consultas administrativas, solicitudes de información general y dudas simples relacionadas con el proceso de atención neurológica.
+
+Las respuestas serán enviadas por correo electrónico dentro de un plazo estimado de al menos <strong>72 horas hábiles</strong>.
+
 </p>
 
 <form action="https://formspree.io/f/REEMPLAZAR_POR_SU_ID" method="POST">
 
-<h5 class="mt-4">Datos del Paciente</h5>
+<h4 class="mt-4">Datos del Paciente</h4>
 
 <div class="mb-3">
-<label class="form-label">Nombre y Apellido</label>
+<label class="form-label">Nombre y Apellido *</label>
 <input type="text" name="nombre" class="form-control" required>
 </div>
 
@@ -91,7 +108,7 @@ Las consultas serán respondidas dentro de un plazo estimado de al menos 72 hora
 </div>
 
 <div class="mb-3">
-<label class="form-label">Correo Electrónico</label>
+<label class="form-label">Correo Electrónico *</label>
 <input type="email" name="email" class="form-control" required>
 </div>
 
@@ -100,27 +117,57 @@ Las consultas serán respondidas dentro de un plazo estimado de al menos 72 hora
 <input type="text" name="obrasocial" class="form-control">
 </div>
 
-<h5 class="mt-4">Solicitud de Turno Prioritario</h5>
+<hr>
+
+<h4>Solicitud de Turno Prioritario</h4>
 
 <div class="form-check mb-3">
-<input class="form-check-input" type="checkbox" name="lista_espera">
+
+<input
+class="form-check-input"
+type="checkbox"
+name="lista_espera">
+
 <label class="form-check-label">
+
 Deseo incorporarme a la lista de espera para un turno anticipado.
+
 </label>
+
 </div>
 
+<p>
+
+La incorporación a la lista de espera no garantiza la asignación inmediata de un turno y dependerá exclusivamente de la disponibilidad de agenda del profesional.
+
+</p>
+
 <div class="mb-3">
-<label class="form-label">Motivo principal de consulta</label>
+
+<label class="form-label">
+
+Motivo principal de consulta
+
+</label>
 
 <select class="form-select" name="motivo">
 
-<option>Problemas cognitivos o memoria</option>
+<option value="">Seleccione una opción</option>
+
+<option>Problemas cognitivos o de memoria</option>
+
 <option>Cefalea</option>
+
 <option>Temblor</option>
+
 <option>Convulsiones</option>
-<option>Vértigo</option>
+
+<option>Vértigo o trastornos del equilibrio</option>
+
 <option>Esclerosis múltiple</option>
-<option>Consulta por estudios</option>
+
+<option>Consulta por estudios médicos</option>
+
 <option>Otros</option>
 
 </select>
@@ -128,73 +175,175 @@ Deseo incorporarme a la lista de espera para un turno anticipado.
 </div>
 
 <div class="mb-3">
-<label class="form-label">Descripción breve</label>
-<textarea class="form-control" rows="4" name="descripcion"></textarea>
-</div>
 
-<h5 class="mt-4">Consulta</h5>
+<label class="form-label">
+
+Si seleccionó "Otros", especifique
+
+</label>
+
+<input type="text" class="form-control" name="otro_motivo">
+
+</div>
 
 <div class="mb-3">
-<label class="form-label">Asunto</label>
-<input type="text" name="asunto" class="form-control">
+
+<label class="form-label">
+
+Descripción breve del motivo de consulta
+
+</label>
+
+<textarea
+class="form-control"
+rows="4"
+name="descripcion">
+</textarea>
+
+</div>
+
+<hr>
+
+<h4>Consulta</h4>
+
+<div class="mb-3">
+
+<label class="form-label">
+
+Asunto
+
+</label>
+
+<input type="text"
+name="asunto"
+class="form-control">
+
 </div>
 
 <div class="mb-3">
-<label class="form-label">Mensaje</label>
-<textarea class="form-control" rows="6" name="mensaje" required></textarea>
-</div>
 
-<h5 class="mt-4">Consentimientos</h5>
+<label class="form-label">
 
-<div class="form-check mb-2">
-<input class="form-check-input" type="checkbox" required>
-<label class="form-check-label">
-He leído y comprendido las condiciones de uso.
+Mensaje *
+
 </label>
+
+<textarea
+class="form-control"
+rows="6"
+name="mensaje"
+required>
+</textarea>
+
 </div>
 
+<div class="alert alert-danger mt-4">
+
+<h4>
+
+<strong>
+⚠️ IMPORTANTE – POR FAVOR LEER ANTES DE ENVIAR SU CONSULTA
+</strong>
+
+</h4>
+
+<p>
+
+Este formulario está destinado exclusivamente a consultas administrativas, información general y solicitudes relacionadas con la atención neurológica.
+
+</p>
+
+<ul>
+
+<li><strong>NO</strong> se recibirán estudios médicos, imágenes, análisis clínicos, historias clínicas o documentación asistencial.</li>
+
+<li><strong>NO</strong> se brindarán diagnósticos médicos, segundas opiniones o indicaciones terapéuticas.</li>
+
+<li><strong>NO</strong> se emitirán certificados, informes médicos o constancias.</li>
+
+<li><strong>NO</strong> se confeccionarán recetas médicas.</li>
+
+<li><strong>NO</strong> se gestionarán formularios especiales ni autorizaciones.</li>
+
+<li><strong>NO</strong> se atenderán urgencias o emergencias médicas.</li>
+
+</ul>
+
+<p>
+
+Las respuestas serán enviadas exclusivamente al correo electrónico informado por el usuario y dentro de un plazo estimado de al menos <strong>72 horas hábiles</strong>.
+
+</p>
+
+</div>
+
+<h4 class="mt-4">Declaración del Usuario</h4>
+
 <div class="form-check mb-2">
-<input class="form-check-input" type="checkbox" required>
+
+<input class="form-check-input"
+type="checkbox"
+required>
+
 <label class="form-check-label">
-Comprendo que este canal no constituye una consulta médica.
+
+He leído y comprendido las condiciones de uso de este formulario.
+
 </label>
+
 </div>
 
 <div class="form-check mb-2">
-<input class="form-check-input" type="checkbox" required>
+
+<input class="form-check-input"
+type="checkbox"
+required>
+
 <label class="form-check-label">
+
+Comprendo que este canal no constituye una consulta médica ni reemplaza la atención profesional.
+
+</label>
+
+</div>
+
+<div class="form-check mb-2">
+
+<input class="form-check-input"
+type="checkbox"
+required>
+
+<label class="form-check-label">
+
 Comprendo que este canal no debe utilizarse para urgencias o emergencias médicas.
+
 </label>
+
 </div>
 
 <div class="form-check mb-4">
-<input class="form-check-input" type="checkbox" required>
+
+<input class="form-check-input"
+type="checkbox"
+required>
+
 <label class="form-check-label">
-Autorizo el tratamiento de los datos consignados para la gestión de esta consulta.
+
+Autorizo el tratamiento de los datos consignados para la gestión de esta consulta y eventual contacto posterior.
+
 </label>
+
 </div>
 
-<button type="submit" class="btn btn-enviar">
+<button
+type="submit"
+class="btn btn-enviar btn-lg">
+
 Enviar Consulta
+
 </button>
 
 </form>
-
-<hr class="mt-5">
-
-<p style="font-size:0.9em;">
-
-No se recibirán estudios médicos, imágenes, análisis clínicos, historias clínicas ni documentación asistencial.
-
-No se brindarán diagnósticos médicos.
-
-No se emitirán certificados, informes ni recetas médicas.
-
-La respuesta será enviada exclusivamente al correo electrónico informado por el usuario.
-
-El envío de este formulario implica la aceptación de las presentes condiciones de uso y protección de datos.
-
-</p>
 
 </div>
 
@@ -203,4 +352,3 @@ El envío de este formulario implica la aceptación de las presentes condiciones
 </body>
 </html>
 ```
-
