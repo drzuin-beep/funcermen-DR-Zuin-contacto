@@ -472,6 +472,8 @@
     <input type="hidden" name="ultima_visita" id="val_visita" value="">
     <input type="hidden" name="lista_espera_txt" id="val_lista_espera" value="No">
     <input type="hidden" name="tipo_consulta" id="val_tipo_consulta" value="">
+    <input type="hidden" name="motivo" id="val_motivo" value="">
+    <input type="hidden" name="otro_motivo" id="val_otro_motivo" value="">
 
     <!-- DATOS DEL PACIENTE -->
     <div class="section-head">
@@ -608,7 +610,7 @@
         <h2 class="modal-title" id="modalTurnoLabel">
           <i class="ti ti-calendar" aria-hidden="true"></i> Solicitud de turno prioritario
         </h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        <button type="button" class="btn-close" id="btnCerrarModalTurno" aria-label="Cerrar"></button>
       </div>
       <div class="modal-body">
 
@@ -628,8 +630,8 @@
           </label>
         </div>
 
-        <label class="form-label" for="motivo">Motivo principal de consulta</label>
-        <select id="motivo" name="motivo" class="form-select" form="formZuin">
+        <label class="form-label" for="motivo_modal">Motivo principal de consulta</label>
+        <select id="motivo_modal" class="form-select">
           <option value="">Seleccione una opción</option>
           <option>Problemas cognitivos o de memoria</option>
           <option>Cefalea</option>
@@ -641,8 +643,8 @@
           <option>Otros</option>
         </select>
 
-        <label class="form-label" for="otro">Si seleccionó "Otros", especifique</label>
-        <input type="text" id="otro" name="otro_motivo" class="form-control" form="formZuin">
+        <label class="form-label" for="otro_modal">Si seleccionó "Otros", especifique</label>
+        <input type="text" id="otro_modal" class="form-control">
 
         <div class="whatsapp-note">
           <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
@@ -692,19 +694,17 @@
     document.getElementById('tipoErrorMsg').classList.remove('show');
   }
 
-  // Sincroniza el checkbox del modal con el campo oculto real que se envía
-  function guardarTurno() {
+  // Captura SIEMPRE los valores actuales del modal (se llama al cerrar, sea como sea)
+  function capturarDatosTurno() {
     var tipoConsulta = document.getElementById('val_tipo_consulta').value;
-
-    if (!tipoConsulta) {
-      document.getElementById('tipoErrorMsg').classList.add('show');
-      return; // no permite guardar ni cerrar el modal sin elegir
-    }
-
     var checked = document.getElementById('lista_espera_modal').checked;
     document.getElementById('val_lista_espera').value = checked ? 'Sí' : 'No';
 
-    var motivo = document.getElementById('motivo').value;
+    var motivo = document.getElementById('motivo_modal').value;
+    var otroMotivo = document.getElementById('otro_modal').value;
+    document.getElementById('val_motivo').value = motivo;
+    document.getElementById('val_otro_motivo').value = otroMotivo;
+
     var resumenEl = document.getElementById('turnoResumenTxt');
 
     var partes = [];
@@ -717,12 +717,29 @@
     } else {
       resumenEl.textContent = 'Aún no completó esta sección opcional. Toque el botón para abrirla.';
     }
-
-    // Cierra el modal manualmente solo si la validación fue exitosa
-    var modalEl = document.getElementById('modalTurno');
-    var modalInstance = bootstrap.Modal.getInstance(modalEl);
-    if (modalInstance) modalInstance.hide();
   }
+
+  // Botón "Guardar y cerrar": exige elegir Primera vez / Ulterior antes de cerrar
+  function guardarTurno() {
+    var tipoConsulta = document.getElementById('val_tipo_consulta').value;
+    if (!tipoConsulta) {
+      document.getElementById('tipoErrorMsg').classList.add('show');
+      return; // no cierra si falta el dato obligatorio
+    }
+    var modalEl = document.getElementById('modalTurno');
+    var modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+    modalInstance.hide();
+  }
+
+  // Sin importar cómo se cierre el modal (X, click afuera, Esc, o "Guardar y cerrar"),
+  // los datos seleccionados hasta ese momento quedan registrados.
+  document.getElementById('modalTurno').addEventListener('hide.bs.modal', capturarDatosTurno);
+
+  document.getElementById('btnCerrarModalTurno').addEventListener('click', function() {
+    var modalEl = document.getElementById('modalTurno');
+    var modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+    modalInstance.hide();
+  });
 
   // Para que el checkbox real "lista_espera" (oculto, requerido por Formspree) se incluya correctamente:
   document.getElementById('formZuin').addEventListener('submit', function() {
