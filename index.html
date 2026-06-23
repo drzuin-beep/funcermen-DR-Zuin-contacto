@@ -373,6 +373,25 @@
   }
 
   /* Modal: título más grande también */
+  .lista-espera-row {
+    margin-bottom: 16px;
+  }
+
+  .lista-espera-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  .lista-espera-aclaracion {
+    font-size: 13.5px;
+    color: #6c757d;
+    margin: 8px 0 0;
+    line-height: 1.5;
+  }
+
   .tipo-consulta-row {
     display: flex;
     align-items: center;
@@ -468,6 +487,7 @@
     <input type="hidden" name="_next" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
     <input type="hidden" name="_language" value="es">
     <input type="text" name="_gotcha" style="display:none">
+    <input type="hidden" name="Resumen_de_la_consulta" id="val_resumen" value="">
     <input type="hidden" name="es_paciente" id="val_paciente" value="">
     <input type="hidden" name="ultima_visita" id="val_visita" value="">
     <input type="hidden" name="lista_espera_txt" id="val_lista_espera" value="No">
@@ -623,11 +643,17 @@
         </div>
         <p class="tipo-error" id="tipoErrorMsg">Por favor seleccione "Primera vez" o "Ulterior" antes de guardar.</p>
 
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="lista_espera_modal">
-          <label class="form-check-label" for="lista_espera_modal">
-            Deseo incorporarme a la lista de espera para un turno anticipado. La incorporación no garantiza asignación inmediata y depende exclusivamente de la disponibilidad de agenda del profesional.
-          </label>
+        <div class="lista-espera-row">
+          <span class="lista-espera-label">¿Desea incorporarse a la lista de espera para un turno anticipado?</span>
+          <div class="radio-group">
+            <div class="radio-btn" id="btn-espera-si" onclick="setListaEspera('Sí')">
+              <i class="ti ti-check" aria-hidden="true"></i> Sí
+            </div>
+            <div class="radio-btn" id="btn-espera-no" onclick="setListaEspera('No')">
+              <i class="ti ti-x" aria-hidden="true"></i> No
+            </div>
+          </div>
+          <p class="lista-espera-aclaracion">La incorporación no garantiza asignación inmediata y depende exclusivamente de la disponibilidad de agenda del profesional.</p>
         </div>
 
         <label class="form-label" for="motivo_modal">Motivo principal de consulta</label>
@@ -687,6 +713,12 @@
     el.classList.add('selected');
   }
 
+  function setListaEspera(val) {
+    document.getElementById('val_lista_espera').value = val;
+    document.getElementById('btn-espera-si').classList.toggle('selected', val === 'Sí');
+    document.getElementById('btn-espera-no').classList.toggle('selected', val === 'No');
+  }
+
   function setTipoConsulta(el, val) {
     document.getElementById('val_tipo_consulta').value = val;
     document.querySelectorAll('.tbtn').forEach(function(b){ b.classList.remove('selected'); });
@@ -697,8 +729,7 @@
   // Captura SIEMPRE los valores actuales del modal (se llama al cerrar, sea como sea)
   function capturarDatosTurno() {
     var tipoConsulta = document.getElementById('val_tipo_consulta').value;
-    var checked = document.getElementById('lista_espera_modal').checked;
-    document.getElementById('val_lista_espera').value = checked ? 'Sí' : 'No';
+    var listaEspera = document.getElementById('val_lista_espera').value;
 
     var motivo = document.getElementById('motivo_modal').value;
     var otroMotivo = document.getElementById('otro_modal').value;
@@ -709,7 +740,7 @@
 
     var partes = [];
     if (tipoConsulta) partes.push(tipoConsulta);
-    if (checked) partes.push('en lista de espera');
+    if (listaEspera === 'Sí') partes.push('en lista de espera');
     if (motivo) partes.push('motivo: ' + motivo);
 
     if (partes.length > 0) {
@@ -766,6 +797,56 @@
       prefijo = prefijo ? prefijo + ' - ' + tipoConsulta : tipoConsulta;
     }
     subjectInput.value = prefijo ? prefijo + ' - ' + subjectBase : subjectBase;
+
+    // Construye el resumen ordenado y separado por secciones para el mail
+    var f = document.getElementById('formZuin');
+    var get = function(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; };
+
+    var nombre = get('nombre');
+    var dni = get('dni');
+    var telefono = get('tel');
+    var email = get('email');
+    var obra = get('obra');
+    var esPacienteVal = document.getElementById('val_paciente').value;
+    var ultimaVisita = document.getElementById('val_visita').value;
+    var asunto = get('asunto');
+    var mensaje = get('msg');
+    var listaEsperaVal = document.getElementById('val_lista_espera').value;
+    var motivoVal = document.getElementById('val_motivo').value;
+    var otroMotivoVal = document.getElementById('val_otro_motivo').value;
+
+    var lineas = [];
+
+    lineas.push('===== DATOS DEL PACIENTE =====');
+    lineas.push('Nombre y apellido: ' + (nombre || '-'));
+    lineas.push('Email: ' + (email || '-'));
+    lineas.push('Teléfono: ' + (telefono || '-'));
+    lineas.push('Cobertura (obra social/prepaga): ' + (obra || '-'));
+    lineas.push('Tipo de consulta: ' + (tipoConsulta || 'No indicado'));
+    if (esPacienteVal === 'Sí') {
+      lineas.push('¿Es paciente del Dr. Zuin?: Sí');
+      lineas.push('Última visita: ' + (ultimaVisita || 'No indicado'));
+    } else if (esPacienteVal === 'No') {
+      lineas.push('¿Es paciente del Dr. Zuin?: No');
+    } else {
+      lineas.push('¿Es paciente del Dr. Zuin?: No indicado');
+    }
+    lineas.push('DNI: ' + (dni || '-'));
+    lineas.push('');
+
+    lineas.push('===== MENSAJE =====');
+    lineas.push('Asunto: ' + (asunto || '-'));
+    lineas.push('Mensaje: ' + (mensaje || '-'));
+    lineas.push('');
+
+    lineas.push('===== TURNO PRIORITARIO =====');
+    lineas.push('¿Lista de espera para turno anticipado?: ' + (listaEsperaVal === 'Sí' ? 'SÍ ⚠️' : 'No'));
+    lineas.push('Motivo principal de consulta: ' + (motivoVal || 'No indicado'));
+    if (otroMotivoVal) {
+      lineas.push('Otro motivo (detalle): ' + otroMotivoVal);
+    }
+
+    document.getElementById('val_resumen').value = lineas.join('\n');
   });
 </script>
 
