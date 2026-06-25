@@ -544,7 +544,24 @@
     <input type="email" id="email" name="email" autocomplete="email" class="form-control" required>
 
     <label class="form-label" for="obra">Obra social / prepaga</label>
-    <input type="text" id="obra" name="obrasocial" class="form-control">
+    <select id="obra" name="obrasocial" class="form-select" onchange="toggleOtraCobertura()">
+      <option value="">Seleccione una opción</option>
+      <option>Particular</option>
+      <option>OSDE 210</option>
+      <option>OSDE 310</option>
+      <option>OSDE 410</option>
+      <option>SMG</option>
+      <option>GALENO</option>
+      <option>PAMI</option>
+      <option>DAMSU</option>
+      <option>OSEP</option>
+      <option>OTRAS</option>
+    </select>
+
+    <div id="otra-cobertura-row" class="visita-hidden">
+      <label class="form-label" for="otra_cobertura">Especifique cobertura</label>
+      <input type="text" id="otra_cobertura" name="otra_cobertura" class="form-control">
+    </div>
 
     <!-- PACIENTE SÍ / NO -->
     <div class="paciente-row">
@@ -720,6 +737,17 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+  function toggleOtraCobertura() {
+    var val = document.getElementById('obra').value;
+    var row = document.getElementById('otra-cobertura-row');
+    if (val === 'OTRAS') {
+      row.classList.remove('visita-hidden');
+    } else {
+      row.classList.add('visita-hidden');
+      document.getElementById('otra_cobertura').value = '';
+    }
+  }
+
   function setPaciente(val) {
     document.getElementById('val_paciente').value = val;
     document.getElementById('btn-si').classList.toggle('selected', val === 'Sí');
@@ -834,6 +862,10 @@
     var telefono = get('tel');
     var email = get('email');
     var obra = get('obra');
+    var otraCobertura = get('otra_cobertura');
+    if (obra === 'OTRAS' && otraCobertura) {
+      obra = 'Otras: ' + otraCobertura;
+    }
     var esPacienteVal = document.getElementById('val_paciente').value;
     var ultimaVisita = document.getElementById('val_visita').value;
     var asunto = get('asunto');
