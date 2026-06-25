@@ -94,20 +94,32 @@
 
   /* Títulos de sección: aumentados para mejor visibilidad (adultos mayores) */
   .section-head {
-    font-size: 19px;
-    font-weight: 700;
+    font-size: 21px;
+    font-weight: 800;
     color: #003366;
     margin: 1.5rem 0 .75rem;
     display: flex;
     align-items: center;
     gap: 8px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #e2e6ea;
+    border-bottom: 3px solid #e2e6ea;
     text-transform: uppercase;
     letter-spacing: .02em;
+    flex-wrap: wrap;
   }
 
-  .section-head i { font-size: 22px; }
+  .section-head i { font-size: 24px; }
+
+  .section-req {
+    font-size: 14px;
+    font-weight: 800;
+    color: #ffffff;
+    background: #dc2626;
+    padding: 3px 10px;
+    border-radius: 6px;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
 
   .form-label {
     font-size: 15px;
@@ -511,7 +523,7 @@
 
     <!-- DATOS DEL PACIENTE -->
     <div class="section-head">
-      <i class="ti ti-user" aria-hidden="true"></i> Datos del paciente
+      <i class="ti ti-user" aria-hidden="true"></i> Datos del paciente <span class="section-req">(OBLIGATORIO)</span>
     </div>
 
     <label class="form-label" for="nombre">Nombre y apellido *</label>
@@ -561,7 +573,7 @@
 
     <!-- CONSULTA (ahora primero) -->
     <div class="section-head">
-      <i class="ti ti-message" aria-hidden="true"></i> Consulta
+      <i class="ti ti-message" aria-hidden="true"></i> Consulta <span class="section-req">(OBLIGATORIO)</span>
     </div>
 
     <label class="form-label" for="asunto">Asunto</label>
