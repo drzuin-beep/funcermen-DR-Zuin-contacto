@@ -336,8 +336,8 @@
 
   /* Botón para abrir el turno prioritario (ventana emergente) */
   .btn-turno {
-    background: #f59e0b;
-    border: 3px solid #b45309;
+    background: #dc2626;
+    border: 3px solid #991b1b;
     color: #ffffff;
     border-radius: 10px;
     padding: 20px 22px;
@@ -350,18 +350,32 @@
     gap: 12px;
     cursor: pointer;
     margin: 1.5rem 0;
-    box-shadow: 0 4px 14px rgba(245,158,11,.45);
+    box-shadow: 0 4px 14px rgba(220,38,38,.5);
     transition: background .15s, transform .15s;
     animation: pulse-turno 2.2s infinite;
   }
 
-  .btn-turno:hover { background: #d97706; transform: translateY(-1px); }
+  .btn-turno:hover { background: #b91c1c; transform: translateY(-1px); }
   .btn-turno i { font-size: 26px; }
 
   @keyframes pulse-turno {
-    0%   { box-shadow: 0 4px 14px rgba(245,158,11,.45); }
-    50%  { box-shadow: 0 4px 22px rgba(245,158,11,.8); }
-    100% { box-shadow: 0 4px 14px rgba(245,158,11,.45); }
+    0%   { box-shadow: 0 4px 14px rgba(220,38,38,.5); }
+    50%  { box-shadow: 0 4px 24px rgba(220,38,38,.9); }
+    100% { box-shadow: 0 4px 14px rgba(220,38,38,.5); }
+  }
+
+  .turno-flecha {
+    text-align: center;
+    margin: -10px 0 6px;
+    font-size: 26px;
+    line-height: 1;
+    color: #dc2626;
+    animation: bounce-flecha 1.4s infinite;
+  }
+
+  @keyframes bounce-flecha {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
   }
 
   .turno-resumen {
@@ -469,7 +483,7 @@
 
   <h1>Dr. Daniel Zuin</h1>
   <p class="form-subtitle">Formulario de contacto</p>
-  <p class="form-desc">Consultas administrativas e información general sobre atención neurológica</p>
+  <p class="form-desc">Consultas administrativas e información general sobre atención neurológica. Pedido de turno prioritario.</p>
 
   <div class="alerta-urgencia">
     <i class="ti ti-alert-triangle" aria-hidden="true"></i>
@@ -583,6 +597,7 @@
       <i class="ti ti-calendar" aria-hidden="true"></i>
       Solicitud de turno prioritario (opcional)
     </button>
+    <div class="turno-flecha">▲</div>
     <p class="turno-resumen" id="turnoResumenTxt">Aún no completó esta sección opcional. Toque el botón para abrirla.</p>
 
     <hr>
@@ -852,4 +867,3 @@
 
 </body>
 </html>
-
