@@ -932,6 +932,26 @@
     }
 
     document.getElementById('val_resumen').value = lineas.join('\n');
+
+    // Envío en paralelo a Web3Forms (modo prueba, además del envío normal a Formspree)
+    try {
+      var datosWeb3 = {
+        access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
+        subject: subjectInput.value,
+        from_name: 'Formulario web - Dr. Daniel Zuin',
+        Resumen_de_la_consulta: lineas.join('\n')
+      };
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(datosWeb3),
+        keepalive: true
+      }).catch(function(err) {
+        console.log('Web3Forms (prueba en paralelo) no se pudo enviar:', err);
+      });
+    } catch (errWeb3) {
+      console.log('Error armando envío a Web3Forms:', errWeb3);
+    }
   });
 </script>
 
