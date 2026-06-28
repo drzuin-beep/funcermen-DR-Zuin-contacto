@@ -1230,10 +1230,13 @@
 
     var subjectInput = document.getElementById('val_subject');
     var esPrioritaria = listaEsp === 'Sí';
-    var prefijo = esPrioritaria ? '🔴 PRIORITARIO' : '';
-    if (tipo) prefijo = prefijo ? prefijo + ' - ' + tipo : tipo;
     var base = 'Nueva consulta web - Dr. Daniel Zuin';
-    subjectInput.value = prefijo ? prefijo + ' - ' + base : base;
+    if (esPrioritaria) {
+      var prefijo = '🔴 PRIORITARIO' + (tipo ? ' - ' + tipo : '');
+      subjectInput.value = prefijo + ' - ' + base;
+    } else {
+      subjectInput.value = base;
+    }
 
     // Envío paralelo a Web3Forms
     try {
