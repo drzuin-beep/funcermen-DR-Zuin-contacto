@@ -1111,7 +1111,7 @@
     }
 
     var lineas = [];
-    lineas.push('===== SOLICITUD DE TURNO PRIORITARIO =====');
+    lineas.push('===== SOLICITUD DE TURNO - LISTA DE ESPERA =====');
     lineas.push('Nombre: ' + (nombre || '-'));
     lineas.push('Email: ' + (email || '-'));
     lineas.push('Teléfono: ' + (telefono || '-') + (whatsappLink ? ' (WhatsApp: ' + whatsappLink + ')' : ''));
@@ -1221,8 +1221,8 @@
     lineas.push('Asunto: ' + (asunto || '-'));
     lineas.push('Mensaje: ' + (mensaje || '-'));
     lineas.push('');
-    lineas.push('===== TURNO PRIORITARIO =====');
-    lineas.push('¿Lista de espera?: ' + (listaEsp === 'Sí' ? 'SÍ ⚠️' : 'No'));
+    lineas.push('===== TURNO =====');
+    lineas.push('Lista de espera para turno anticipado: ' + (listaEsp === 'Sí' ? 'SÍ ⚠️' : 'No'));
     lineas.push('Motivo principal: ' + (motivo || 'No indicado'));
     if (otroMot) lineas.push('Otro motivo: ' + otroMot);
 
