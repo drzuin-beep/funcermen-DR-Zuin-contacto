@@ -6,7 +6,6 @@
 <title>Dr. Daniel Zuin - Formulario de Contacto</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 <style>
   * { box-sizing: border-box; }
 
@@ -957,8 +956,6 @@
 
       <p class="data-note">Los datos suministrados serán utilizados exclusivamente para responder la consulta realizada y gestionar eventuales comunicaciones relacionadas con la atención solicitada.</p>
 
-      <div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be1"></div>
-      <div style="margin-bottom:14px;"></div>
 
       <button type="submit" class="btn-enviar" id="btn-submit-e">
         <i class="ti ti-send" aria-hidden="true"></i>
@@ -1177,8 +1174,6 @@
 
       <p class="data-note">Los datos suministrados serán utilizados exclusivamente para responder la consulta realizada y gestionar eventuales comunicaciones relacionadas con la atención solicitada.</p>
 
-      <div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be1"></div>
-      <div style="margin-bottom:14px;"></div>
 
       <button type="submit" class="btn-enviar" id="btn-submit-c">
         <i class="ti ti-send" aria-hidden="true"></i>
@@ -1316,12 +1311,6 @@
     el.classList.add('selected');
   }
 
-  function getCaptchaResponse(form) {
-    // Obtiene el token de hCaptcha del formulario (inyectado automáticamente por hCaptcha)
-    var textarea = form.querySelector('[name="h-captcha-response"]');
-    return textarea ? textarea.value : '';
-  }
-
   /* ============================
      ENVÍO A WEB3FORMS
      ============================ */
@@ -1348,8 +1337,6 @@
       errorEl.classList.add('show');
       btnEl.disabled = false;
       btnEl.innerHTML = '<i class="ti ti-send" aria-hidden="true"></i> Intentar nuevamente';
-      // Reset hCaptcha si está disponible
-      if (window.hcaptcha) { window.hcaptcha.reset(); }
     });
   }
 
@@ -1378,7 +1365,6 @@
     var motivo   = document.getElementById('motivo_e').value;
     var otroMot  = document.getElementById('otro_e').value.trim();
     var mensaje  = document.getElementById('msg_e').value.trim();
-    var captcha  = getCaptchaResponse(this);
 
     if (!nombre || !telefono || !email) {
       alert('Por favor complete los campos obligatorios: nombre, teléfono y correo electrónico.');
@@ -1430,8 +1416,6 @@
       tipo_formulario: 'Lista de espera prioritaria',
       acepta_condiciones: 'Sí - aceptado al enviar el formulario'
     };
-
-    if (captcha) payload['h-captcha-response'] = captcha;
 
     enviarWeb3Forms(
       payload,
@@ -1488,7 +1472,6 @@
     var tipo     = document.getElementById('val_tipo_consulta').value;
     var motivo   = document.getElementById('val_motivo').value;
     var otroMot  = document.getElementById('val_otro_motivo').value;
-    var captcha  = getCaptchaResponse(this);
 
     if (!nombre || !telefono || !email) {
       alert('Por favor complete los campos obligatorios: nombre, teléfono y correo electrónico.');
@@ -1563,8 +1546,6 @@
       tipo_formulario: 'Consulta administrativa',
       acepta_condiciones: 'Sí - aceptado al enviar el formulario'
     };
-
-    if (captcha) payload['h-captcha-response'] = captcha;
 
     enviarWeb3Forms(
       payload,
