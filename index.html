@@ -651,8 +651,9 @@
       Complete este formulario para incorporarse a la lista de espera. La asignación de turno no es inmediata y depende exclusivamente de la disponibilidad de agenda del profesional.
     </p>
 
-    <form action="https://formspree.io/f/mbdebwne" method="POST" id="formEspera">
+    <form action="https://api.web3forms.com/submit" method="POST" id="formEspera">
 
+      <input type="hidden" name="access_key" value="643eb3bc-99c6-46b9-9292-940724a904bd">
       <input type="hidden" name="_subject" id="val_subject_e" value="🔴 PRIORITARIO - Solicitud lista de espera - Dr. Daniel Zuin">
       <input type="hidden" name="_next" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
       <input type="hidden" name="_language" value="es">
@@ -815,8 +816,9 @@
       Las respuestas serán enviadas por correo electrónico en un plazo estimado de al menos <strong>72 horas hábiles</strong>.
     </p>
 
-    <form action="https://formspree.io/f/mbdebwne" method="POST" id="formZuin">
+    <form action="https://api.web3forms.com/submit" method="POST" id="formZuin">
 
+      <input type="hidden" name="access_key" value="643eb3bc-99c6-46b9-9292-940724a904bd">
       <input type="hidden" name="_subject" id="val_subject" value="Nueva consulta web - Dr. Daniel Zuin">
       <input type="hidden" name="_next" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
       <input type="hidden" name="_language" value="es">
@@ -1131,21 +1133,6 @@
 
     document.getElementById('val_resumen_e').value = lineas.join('\n');
     document.getElementById('val_subject_e').value = '🔴 PRIORITARIO - ' + (tipo ? tipo + ' - ' : '') + 'Lista de espera - Dr. Daniel Zuin';
-
-    // Envío paralelo a Web3Forms
-    try {
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
-          subject: document.getElementById('val_subject_e').value,
-          from_name: 'Formulario web - Dr. Daniel Zuin',
-          Resumen: lineas.join('\n')
-        }),
-        keepalive: true
-      }).catch(function(err) { console.log('Web3Forms:', err); });
-    } catch(e2) { console.log(e2); }
   });
 
   /* ============================
@@ -1243,20 +1230,6 @@
       subjectInput.value = base;
     }
 
-    // Envío paralelo a Web3Forms
-    try {
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
-          subject: subjectInput.value,
-          from_name: 'Formulario web - Dr. Daniel Zuin',
-          Resumen_de_la_consulta: lineas.join('\n')
-        }),
-        keepalive: true
-      }).catch(function(err) { console.log('Web3Forms:', err); });
-    } catch(e2) { console.log(e2); }
   });
 
 </script>
