@@ -207,8 +207,7 @@
      SECCIONES DE FORMULARIO
      ============================ */
   #seccion-espera,
-  #seccion-consulta,
-  #pantalla-gracias { display: none; }
+  #seccion-consulta { display: none; }
 
   .btn-volver {
     background: none;
@@ -526,7 +525,6 @@
   }
 
   .btn-enviar:hover { background: #002244; color: #fff; }
-  .btn-enviar:disabled { background: #6c757d; cursor: not-allowed; }
   .btn-enviar i { font-size: 18px; }
 
   .consent-footnote {
@@ -537,194 +535,18 @@
     margin-bottom: 0;
   }
 
-  .error-msg {
-    display: none;
-    background: #fdecea;
-    border: 1px solid #f5c6cb;
-    border-radius: 8px;
-    padding: 12px 15px;
-    font-size: 14px;
-    color: #842029;
-    margin-top: 14px;
+  .gracias-msg {
+    margin-top: 16px;
+    font-size: 15px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-  .error-msg.show { display: block; }
+
+  .gracias-msg i { color: #003366; font-size: 18px; }
 
   hr { border: none; border-top: 1px solid #e2e6ea; margin: 1.25rem 0; }
-
-  /* ============================
-     PANTALLA DE GRACIAS
-     ============================ */
-  #pantalla-gracias {
-    text-align: center;
-    padding: 1rem 0;
-  }
-
-  .gracias-check-circle {
-    width: 70px;
-    height: 70px;
-    background: #22c55e;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.25rem;
-  }
-
-  .gracias-check-circle svg {
-    width: 38px;
-    height: 38px;
-    stroke: white;
-    stroke-width: 3;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  .gracias-titulo {
-    font-size: 26px;
-    font-weight: 800;
-    color: #003366;
-    margin-bottom: 0.5rem;
-  }
-
-  .gracias-subtitulo {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-  }
-
-  .numero-box {
-    background: #f0f4f9;
-    border: 1.5px solid #c5d4e8;
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin-bottom: 1.5rem;
-    display: inline-block;
-    width: 100%;
-  }
-
-  .numero-label {
-    font-size: 13.5px;
-    color: #6c757d;
-    margin-bottom: 6px;
-  }
-
-  .numero-consulta {
-    font-size: 26px;
-    font-weight: 800;
-    color: #003366;
-    letter-spacing: .04em;
-  }
-
-  .pasos-box {
-    background: #f8f9fa;
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin-bottom: 1.25rem;
-    text-align: left;
-  }
-
-  .pasos-titulo {
-    font-size: 15px;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
-
-  .pasos-box ul {
-    padding-left: 0;
-    list-style: none;
-  }
-
-  .pasos-box ul li {
-    font-size: 14.5px;
-    color: #555;
-    line-height: 1.6;
-    padding: 4px 0 4px 22px;
-    position: relative;
-  }
-
-  .pasos-box ul li::before {
-    content: "✓";
-    color: #22c55e;
-    font-weight: 700;
-    position: absolute;
-    left: 0;
-  }
-
-  .urgencia-box-gracias {
-    background: #fff8e1;
-    border-left: 3px solid #f59e0b;
-    border-radius: 0 8px 8px 0;
-    padding: 12px 15px;
-    margin-bottom: 1.5rem;
-    text-align: left;
-    font-size: 14px;
-    color: #7c4f00;
-    line-height: 1.6;
-  }
-
-  .urgencia-box-gracias strong { color: #b45309; }
-
-  .whatsapp-box-gracias {
-    background: #dcfce7;
-    border: 1.5px solid #86efac;
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  .whatsapp-box-gracias p {
-    font-size: 15px;
-    color: #166534;
-    margin-bottom: 12px;
-    font-weight: 600;
-    line-height: 1.5;
-  }
-
-  .btn-wsp {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #25d366;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    padding: 13px 28px;
-    font-size: 17px;
-    font-weight: 800;
-    transition: background .15s;
-  }
-
-  .btn-wsp:hover { background: #1ebe5d; color: white; }
-
-  .btn-wsp svg {
-    width: 24px;
-    height: 24px;
-    fill: white;
-    flex-shrink: 0;
-  }
-
-  .btn-nueva-consulta {
-    display: inline-block;
-    background: #003366;
-    color: white;
-    text-decoration: none;
-    border: none;
-    border-radius: 8px;
-    padding: 13px 32px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background .15s;
-  }
-
-  .btn-nueva-consulta:hover { background: #002244; color: white; }
 
   @media (max-width: 520px) {
     .row2 { grid-template-columns: 1fr; }
@@ -734,8 +556,6 @@
     .opcion-icono { width: 44px; height: 44px; }
     .opcion-icono i { font-size: 22px; }
     .opcion-titulo { font-size: 16px; }
-    .gracias-titulo { font-size: 22px; }
-    .numero-consulta { font-size: 22px; }
   }
 </style>
 </head>
@@ -830,9 +650,12 @@
       Complete este formulario para incorporarse a la lista de espera. La asignación de turno no es inmediata y depende exclusivamente de la disponibilidad de agenda del profesional.
     </p>
 
-    <form id="formEspera" novalidate>
+    <form action="https://formspree.io/f/mbdebwne" method="POST" id="formEspera">
 
-      <input type="hidden" id="val_subject_e" value="🔴 PRIORITARIO - Solicitud lista de espera - Dr. Daniel Zuin">
+      <input type="hidden" name="_subject" id="val_subject_e" value="🔴 PRIORITARIO - Solicitud lista de espera - Dr. Daniel Zuin">
+      <input type="hidden" name="_next" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
+      <input type="hidden" name="_language" value="es">
+      <input type="text" name="_gotcha" style="display:none">
       <input type="hidden" name="tipo_formulario" value="Lista de espera prioritaria">
       <input type="hidden" name="tipo_consulta_e" id="val_tipo_consulta_e" value="">
       <input type="hidden" name="lista_espera" value="Sí">
@@ -954,18 +777,20 @@
         <p>Autorizo el tratamiento de los datos consignados exclusivamente para la gestión de esta solicitud. Las respuestas serán enviadas únicamente al correo electrónico informado.</p>
       </div>
 
+      <input type="hidden" name="acepta_condiciones" value="Sí - aceptado al enviar el formulario">
+
       <p class="data-note">Los datos suministrados serán utilizados exclusivamente para responder la consulta realizada y gestionar eventuales comunicaciones relacionadas con la atención solicitada.</p>
 
-
-      <button type="submit" class="btn-enviar" id="btn-submit-e">
+      <button type="submit" class="btn-enviar">
         <i class="ti ti-send" aria-hidden="true"></i>
         Enviar solicitud prioritaria
       </button>
 
       <p class="consent-footnote">Al hacer clic en <strong>"Enviar solicitud prioritaria"</strong>, usted declara haber leído, comprendido y aceptado las condiciones precedentes.</p>
 
-      <div class="error-msg" id="error-e">
-        Ocurrió un error al enviar la solicitud. Por favor intente nuevamente o contáctese por WhatsApp: <strong>261 208-5393</strong>.
+      <div class="gracias-msg">
+        <i class="ti ti-heart" aria-hidden="true"></i>
+        <span>Gracias por su contacto. Le responderemos a la brevedad.</span>
       </div>
 
     </form>
@@ -987,9 +812,12 @@
       Las respuestas serán enviadas por correo electrónico en un plazo estimado de al menos <strong>72 horas hábiles</strong>.
     </p>
 
-    <form id="formZuin" novalidate>
+    <form action="https://formspree.io/f/mbdebwne" method="POST" id="formZuin">
 
-      <input type="hidden" id="val_subject" value="Nueva consulta web - Dr. Daniel Zuin">
+      <input type="hidden" name="_subject" id="val_subject" value="Nueva consulta web - Dr. Daniel Zuin">
+      <input type="hidden" name="_next" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
+      <input type="hidden" name="_language" value="es">
+      <input type="text" name="_gotcha" style="display:none">
       <input type="hidden" name="tipo_formulario" value="Consulta administrativa">
       <input type="hidden" name="Resumen_de_la_consulta" id="val_resumen" value="">
       <input type="hidden" name="es_paciente" id="val_paciente" value="">
@@ -1172,79 +1000,30 @@
         <p>Autorizo el tratamiento de los datos consignados exclusivamente para la gestión de esta consulta y para eventuales comunicaciones relacionadas con la atención solicitada.</p>
       </div>
 
+      <input type="hidden" name="acepta_condiciones" value="Sí - aceptado al enviar el formulario">
+
       <p class="data-note">Los datos suministrados serán utilizados exclusivamente para responder la consulta realizada y gestionar eventuales comunicaciones relacionadas con la atención solicitada.</p>
 
-
-      <button type="submit" class="btn-enviar" id="btn-submit-c">
+      <button type="submit" class="btn-enviar">
         <i class="ti ti-send" aria-hidden="true"></i>
         Enviar consulta
       </button>
 
       <p class="consent-footnote">Al hacer clic en <strong>"Enviar consulta"</strong>, usted declara haber leído, comprendido y aceptado las condiciones precedentes.</p>
 
-      <div class="error-msg" id="error-c">
-        Ocurrió un error al enviar la consulta. Por favor intente nuevamente o contáctese por WhatsApp: <strong>261 208-5393</strong>.
+      <div class="gracias-msg">
+        <i class="ti ti-heart" aria-hidden="true"></i>
+        <span>Gracias por su contacto. Le responderemos a la brevedad.</span>
       </div>
 
     </form>
 
   </div><!-- /seccion-consulta -->
 
-
-  <!-- ============================
-       PANTALLA DE GRACIAS
-       ============================ -->
-  <div id="pantalla-gracias">
-
-    <div class="gracias-check-circle">
-      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-    </div>
-
-    <h1 class="gracias-titulo">¡Consulta Enviada con Éxito!</h1>
-    <p class="gracias-subtitulo">Hemos recibido su consulta correctamente.<br>Le responderemos al correo informado a la brevedad.</p>
-
-    <div class="numero-box">
-      <p class="numero-label">Su número de consulta es:</p>
-      <p class="numero-consulta" id="numConsulta">DZ-...</p>
-    </div>
-
-    <div class="pasos-box">
-      <p class="pasos-titulo"><span>📋</span> Próximos pasos:</p>
-      <ul>
-        <li>Guarde este número de consulta para su referencia</li>
-        <li>Recibirá una respuesta en su correo electrónico dentro de las próximas <strong>72 horas hábiles</strong></li>
-        <li>Revise su carpeta de spam si no recibe respuesta</li>
-        <li>Para solicitar o gestionar un turno, contáctese por WhatsApp: <strong>261 208 5393</strong></li>
-      </ul>
-    </div>
-
-    <div class="urgencia-box-gracias">
-      ⚠️ <strong>Recordatorio importante:</strong> Si su situación es una urgencia médica, no espere la respuesta por correo. Acuda inmediatamente a la guardia más cercana o llame al <strong>107</strong>.
-    </div>
-
-    <div class="whatsapp-box-gracias">
-      <p>Para solicitar o gestionar un turno<br>comuníquese por WhatsApp:</p>
-      <a href="https://wa.me/5492612085393" target="_blank" class="btn-wsp">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.522 5.849L.057 23.617a.75.75 0 0 0 .921.921l5.769-1.465A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.891 0-3.667-.523-5.183-1.432l-.37-.22-3.827.972.988-3.604-.242-.374A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
-        </svg>
-        Solicitar turno — 261 208 5393
-      </a>
-    </div>
-
-    <button type="button" class="btn-nueva-consulta" onclick="volverSelector()">
-      Volver al inicio
-    </button>
-
-  </div><!-- /pantalla-gracias -->
-
 </div><!-- /main-box -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-
-  var WEB3FORMS_KEY = '643eb3bc-99c6-46b9-9292-940724a904bd';
 
   /* ============================
      NAVEGACIÓN ENTRE SECCIONES
@@ -1253,34 +1032,19 @@
     document.getElementById('pantalla-selector').style.display = 'none';
     document.getElementById('seccion-espera').style.display = 'none';
     document.getElementById('seccion-consulta').style.display = 'none';
-    document.getElementById('pantalla-gracias').style.display = 'none';
     if (cual === 'espera') {
       document.getElementById('seccion-espera').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       document.getElementById('seccion-consulta').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function volverSelector() {
     document.getElementById('seccion-espera').style.display = 'none';
     document.getElementById('seccion-consulta').style.display = 'none';
-    document.getElementById('pantalla-gracias').style.display = 'none';
     document.getElementById('pantalla-selector').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function mostrarGracias() {
-    document.getElementById('seccion-espera').style.display = 'none';
-    document.getElementById('seccion-consulta').style.display = 'none';
-    // Genera número de consulta: DZ-YYYYMMDD-XXX
-    var hoy = new Date();
-    var anio = hoy.getFullYear();
-    var mes = String(hoy.getMonth() + 1).padStart(2, '0');
-    var dia = String(hoy.getDate()).padStart(2, '0');
-    var rand = Math.floor(100 + Math.random() * 900);
-    document.getElementById('numConsulta').textContent = 'DZ-' + anio + mes + dia + '-' + rand;
-    document.getElementById('pantalla-gracias').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -1312,38 +1076,9 @@
   }
 
   /* ============================
-     ENVÍO A WEB3FORMS
-     ============================ */
-  function enviarWeb3Forms(payload, btnEl, errorEl, onSuccess) {
-    btnEl.disabled = true;
-    btnEl.innerHTML = '<i class="ti ti-loader" aria-hidden="true"></i> Enviando…';
-    errorEl.classList.remove('show');
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      if (data.success) {
-        onSuccess();
-      } else {
-        throw new Error(data.message || 'Error desconocido');
-      }
-    })
-    .catch(function(err) {
-      console.error('Web3Forms error:', err);
-      errorEl.classList.add('show');
-      btnEl.disabled = false;
-      btnEl.innerHTML = '<i class="ti ti-send" aria-hidden="true"></i> Intentar nuevamente';
-    });
-  }
-
-  /* ============================
      FORMULARIO ESPERA
      ============================ */
-  var listaEsperaE = 'Sí';
+  var listaEsperaE = 'Sí'; // default: sí (ya preseleccionado)
 
   function setListaEsperaE(val) {
     listaEsperaE = val;
@@ -1352,24 +1087,18 @@
   }
 
   document.getElementById('formEspera').addEventListener('submit', function(e) {
-    e.preventDefault();
 
-    var nombre   = document.getElementById('nombre_e').value.trim();
-    var dni      = document.getElementById('dni_e').value.trim();
-    var edad     = document.getElementById('edad_e').value.trim();
-    var telefono = document.getElementById('tel_e').value.trim();
-    var email    = document.getElementById('email_e').value.trim();
-    var obra     = document.getElementById('obra_e').value;
-    var otraCob  = document.getElementById('otra_cobertura_e').value.trim();
-    var tipo     = document.getElementById('val_tipo_consulta_e').value;
-    var motivo   = document.getElementById('motivo_e').value;
-    var otroMot  = document.getElementById('otro_e').value.trim();
-    var mensaje  = document.getElementById('msg_e').value.trim();
-
-    if (!nombre || !telefono || !email) {
-      alert('Por favor complete los campos obligatorios: nombre, teléfono y correo electrónico.');
-      return;
-    }
+    var nombre    = document.getElementById('nombre_e').value.trim();
+    var dni       = document.getElementById('dni_e').value.trim();
+    var edad      = document.getElementById('edad_e').value.trim();
+    var telefono  = document.getElementById('tel_e').value.trim();
+    var email     = document.getElementById('email_e').value.trim();
+    var obra      = document.getElementById('obra_e').value;
+    var otraCob   = document.getElementById('otra_cobertura_e').value.trim();
+    var tipo      = document.getElementById('val_tipo_consulta_e').value;
+    var motivo    = document.getElementById('motivo_e').value;
+    var otroMot   = document.getElementById('otro_e').value.trim();
+    var mensaje   = document.getElementById('msg_e').value.trim();
 
     if (obra === 'OTRAS' && otraCob) obra = 'Otras: ' + otraCob;
 
@@ -1393,36 +1122,25 @@
     lineas.push('Lista de espera: SÍ ⚠️');
     lineas.push('Motivo: ' + (motivo || '-'));
     if (otroMot) lineas.push('Otro motivo: ' + otroMot);
-    if (mensaje)  lineas.push('Comentarios: ' + mensaje);
+    if (mensaje) lineas.push('Comentarios: ' + mensaje);
 
-    var asunto = '🔴 PRIORITARIO - ' + (tipo ? tipo + ' - ' : '') + 'Lista de espera - Dr. Daniel Zuin';
+    document.getElementById('val_resumen_e').value = lineas.join('\n');
+    document.getElementById('val_subject_e').value = '🔴 PRIORITARIO - ' + (tipo ? tipo + ' - ' : '') + 'Lista de espera - Dr. Daniel Zuin';
 
-    var payload = {
-      access_key: WEB3FORMS_KEY,
-      subject: asunto,
-      from_name: 'Formulario web - Dr. Daniel Zuin',
-      nombre: nombre,
-      email: email,
-      telefono: telefono + (whatsappLink ? ' (' + whatsappLink + ')' : ''),
-      edad: edad || '-',
-      dni: dni || '-',
-      cobertura: obra || '-',
-      tipo_consulta: tipo || '-',
-      lista_espera: 'SÍ',
-      motivo: motivo || '-',
-      otro_motivo: otroMot || '-',
-      comentarios: mensaje || '-',
-      Resumen: lineas.join('\n'),
-      tipo_formulario: 'Lista de espera prioritaria',
-      acepta_condiciones: 'Sí - aceptado al enviar el formulario'
-    };
-
-    enviarWeb3Forms(
-      payload,
-      document.getElementById('btn-submit-e'),
-      document.getElementById('error-e'),
-      mostrarGracias
-    );
+    // Envío paralelo a Web3Forms
+    try {
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
+          subject: document.getElementById('val_subject_e').value,
+          from_name: 'Formulario web - Dr. Daniel Zuin',
+          Resumen: lineas.join('\n')
+        }),
+        keepalive: true
+      }).catch(function(err) { console.log('Web3Forms:', err); });
+    } catch(e2) { console.log(e2); }
   });
 
   /* ============================
@@ -1454,9 +1172,7 @@
     document.getElementById('btn-espera-no-c').classList.toggle('selected', val === 'No');
   }
 
-  document.getElementById('formZuin').addEventListener('submit', function(e) {
-    e.preventDefault();
-
+  document.getElementById('formZuin').addEventListener('submit', function() {
     var nombre   = document.getElementById('nombre').value.trim();
     var dni      = document.getElementById('dni').value.trim();
     var edad     = document.getElementById('edad').value.trim();
@@ -1472,15 +1188,6 @@
     var tipo     = document.getElementById('val_tipo_consulta').value;
     var motivo   = document.getElementById('val_motivo').value;
     var otroMot  = document.getElementById('val_otro_motivo').value;
-
-    if (!nombre || !telefono || !email) {
-      alert('Por favor complete los campos obligatorios: nombre, teléfono y correo electrónico.');
-      return;
-    }
-    if (!mensaje || mensaje.length < 30) {
-      alert('Por favor describa su consulta (mínimo 30 caracteres).');
-      return;
-    }
 
     if (obra === 'OTRAS' && otraCob) obra = 'Otras: ' + otraCob;
 
@@ -1519,40 +1226,32 @@
     lineas.push('Motivo principal: ' + (motivo || 'No indicado'));
     if (otroMot) lineas.push('Otro motivo: ' + otroMot);
 
+    document.getElementById('val_resumen').value = lineas.join('\n');
+
+    var subjectInput = document.getElementById('val_subject');
     var esPrioritaria = listaEsp === 'Sí';
-    var subjectVal = esPrioritaria
-      ? '🔴 PRIORITARIO' + (tipo ? ' - ' + tipo : '') + ' - Nueva consulta web - Dr. Daniel Zuin'
-      : 'Nueva consulta web - Dr. Daniel Zuin';
+    var base = 'Nueva consulta web - Dr. Daniel Zuin';
+    if (esPrioritaria) {
+      var prefijo = '🔴 PRIORITARIO' + (tipo ? ' - ' + tipo : '');
+      subjectInput.value = prefijo + ' - ' + base;
+    } else {
+      subjectInput.value = base;
+    }
 
-    var payload = {
-      access_key: WEB3FORMS_KEY,
-      subject: subjectVal,
-      from_name: 'Formulario web - Dr. Daniel Zuin',
-      nombre: nombre,
-      email: email,
-      telefono: telefono + (whatsappLink ? ' (' + whatsappLink + ')' : ''),
-      edad: edad || '-',
-      dni: dni || '-',
-      cobertura: obra || '-',
-      es_paciente: paciente || 'No indicado',
-      ultima_visita: visita || '-',
-      asunto_consulta: asunto || '-',
-      mensaje: mensaje,
-      lista_espera: listaEsp === 'Sí' ? 'SÍ ⚠️' : 'No',
-      tipo_consulta: tipo || '-',
-      motivo: motivo || '-',
-      otro_motivo: otroMot || '-',
-      Resumen_de_la_consulta: lineas.join('\n'),
-      tipo_formulario: 'Consulta administrativa',
-      acepta_condiciones: 'Sí - aceptado al enviar el formulario'
-    };
-
-    enviarWeb3Forms(
-      payload,
-      document.getElementById('btn-submit-c'),
-      document.getElementById('error-c'),
-      mostrarGracias
-    );
+    // Envío paralelo a Web3Forms
+    try {
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
+          subject: subjectInput.value,
+          from_name: 'Formulario web - Dr. Daniel Zuin',
+          Resumen_de_la_consulta: lineas.join('\n')
+        }),
+        keepalive: true
+      }).catch(function(err) { console.log('Web3Forms:', err); });
+    } catch(e2) { console.log(e2); }
   });
 
 </script>
