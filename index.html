@@ -1,564 +1,565 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dr. Daniel Zuin - Formulario de Contacto</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<script src="https://web3forms.com/client/script.js" async defer></script>
-<style>
-  * { box-sizing: border-box; }
-
-  body {
-    background: #f5f7fa;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    padding: 1.5rem 1rem;
-  }
-
-  .main-box {
-    background: white;
-    border-radius: 12px;
-    border: 1px solid #e2e6ea;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 2rem 2rem 2.5rem;
-    box-shadow: 0 2px 16px rgba(0,0,0,.06);
-  }
-
-  .logo-area {
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-
-  .logo-area img {
-    max-width: 320px;
-    width: 100%;
-    height: auto;
-  }
-
-  h1 {
-    font-size: 23px;
-    font-weight: 700;
-    color: #003366;
-    text-align: center;
-    margin-bottom: 4px;
-  }
-
-  .form-subtitle {
-    text-align: center;
-    font-size: 17px;
-    font-weight: 600;
-    color: #222;
-    margin-bottom: 4px;
-  }
-
-  .form-desc {
-    font-size: 16px;
-    color: #6c757d;
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-
-  .alerta-urgencia {
-    background: #fff8e1;
-    border-left: 3px solid #f59e0b;
-    border-radius: 0 8px 8px 0;
-    padding: 12px 15px;
-    margin-bottom: 1.5rem;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-
-  .alerta-urgencia i {
-    color: #b45309;
-    font-size: 20px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .alerta-urgencia p {
-    font-size: 15px;
-    color: #7c4f00;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  /* ============================
-     PANTALLA SELECTOR INICIAL
-     ============================ */
-  #pantalla-selector { display: block; }
-
-  .selector-titulo {
-    font-size: 18px;
-    font-weight: 700;
-    color: #003366;
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-
-  .opciones-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-bottom: 1.5rem;
-  }
-
-  .opcion-card {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 18px 20px;
-    border-radius: 10px;
-    border: 2px solid #e2e6ea;
-    cursor: pointer;
-    transition: border-color .15s, background .15s, transform .12s;
-    text-decoration: none;
-    background: white;
-    width: 100%;
-    text-align: left;
-  }
-
-  .opcion-card:hover {
-    border-color: #003366;
-    background: #f0f4f9;
-    transform: translateY(-1px);
-    text-decoration: none;
-  }
-
-  .opcion-card:active { transform: scale(.99); }
-
-  .opcion-icono {
-    width: 52px;
-    height: 52px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .opcion-icono i { font-size: 26px; }
-
-  .opcion-1 .opcion-icono { background: #e6f4ea; color: #1a7a3d; }
-  .opcion-2 .opcion-icono { background: #fdecea; color: #c0392b; }
-  .opcion-3 .opcion-icono { background: #e8eef6; color: #003366; }
-
-  .opcion-texto { flex: 1; }
-
-  .opcion-titulo {
-    font-size: 17px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 4px;
-    line-height: 1.3;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .opcion-desc {
-    font-size: 14px;
-    color: #6c757d;
-    line-height: 1.55;
-    margin: 0;
-  }
-
-  .opcion-wsp {
-    font-size: 13px;
-    color: #1a7a3d;
-    font-weight: 600;
-    margin-top: 5px;
-    display: block;
-  }
-
-  .opcion-flecha {
-    font-size: 22px;
-    color: #ced4da;
-    flex-shrink: 0;
-    line-height: 1;
-  }
-
-  .opcion-card:hover .opcion-flecha { color: #003366; }
-
-  .badge-urgente {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 700;
-    background: #dc2626;
-    color: white;
-    border-radius: 6px;
-    padding: 2px 8px;
-    text-transform: uppercase;
-    letter-spacing: .04em;
-  }
-
-  .nota-pie-selector {
-    font-size: 13px;
-    color: #adb5bd;
-    text-align: center;
-    line-height: 1.6;
-    margin-top: .5rem;
-  }
-
-  /* ============================
-     SECCIONES DE FORMULARIO
-     ============================ */
-  #seccion-espera,
-  #seccion-consulta { display: none; }
-
-  .btn-volver {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #003366;
-    font-size: 14px;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 1.25rem;
-    padding: 0;
-  }
-
-  .btn-volver:hover { text-decoration: underline; }
-  .btn-volver i { font-size: 16px; }
-
-  .intro-text {
-    font-size: 15px;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-  }
-
-  .section-head {
-    font-size: 21px;
-    font-weight: 800;
-    color: #003366;
-    margin: 1.5rem 0 .75rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 8px;
-    border-bottom: 3px solid #e2e6ea;
-    text-transform: uppercase;
-    letter-spacing: .02em;
-    flex-wrap: wrap;
-  }
-
-  .section-head i { font-size: 24px; }
-
-  .section-req {
-    font-size: 14px;
-    font-weight: 800;
-    color: #ffffff;
-    background: #dc2626;
-    padding: 3px 10px;
-    border-radius: 6px;
-    letter-spacing: .03em;
-    text-transform: uppercase;
-  }
-
-  .form-label {
-    font-size: 15px;
-    color: #555;
-    margin-bottom: 5px;
-  }
-
-  .form-control, .form-select {
-    font-size: 15px;
-    padding: 10px 13px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    margin-bottom: 13px;
-  }
-
-  .form-control:focus, .form-select:focus {
-    border-color: #003366;
-    box-shadow: 0 0 0 2px rgba(0,51,102,.12);
-  }
-
-  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-  .paciente-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 13px;
-    flex-wrap: wrap;
-  }
-
-  .paciente-row .paciente-label {
-    font-size: 15px;
-    color: #555;
-    margin: 0;
-  }
-
-  .radio-group { display: flex; gap: 8px; }
-
-  .radio-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 20px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
-    color: #555;
-    background: white;
-    transition: all .15s;
-    user-select: none;
-  }
-
-  .radio-btn:hover { border-color: #003366; color: #003366; background: #f0f4f9; }
-  .radio-btn.selected { border-color: #003366; color: #003366; background: #e8eef6; font-weight: 600; }
-  .radio-btn i { font-size: 16px; }
-
-  .visita-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 13px;
-    flex-wrap: wrap;
-  }
-
-  .visita-row .visita-label { font-size: 15px; color: #555; margin: 0; }
-  .visita-opts { display: flex; gap: 8px; flex-wrap: wrap; }
-
-  .vbtn {
-    padding: 8px 16px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14.5px;
-    color: #555;
-    background: white;
-    transition: all .15s;
-    user-select: none;
-  }
-
-  .vbtn:hover { border-color: #003366; color: #003366; background: #f0f4f9; }
-  .vbtn.selected { border-color: #003366; color: #003366; background: #e8eef6; font-weight: 600; }
-
-  .visita-hidden { display: none; }
-
-  .form-text { font-size: 13.5px; color: #6c757d; margin-top: -9px; margin-bottom: 14px; }
-
-  .restrict-box {
-    border: 1px solid #f5c6cb;
-    border-radius: 8px;
-    padding: 13px 15px;
-    margin: 1rem 0;
-  }
-
-  .restrict-box .rhead {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #842029;
-    margin-bottom: 9px;
-  }
-
-  .restrict-box .rhead i { font-size: 16px; }
-
-  .restrict-box ul {
-    padding-left: 18px;
-    font-size: 14px;
-    color: #555;
-    line-height: 1.8;
-    margin: 0;
-  }
-
-  .restrict-box ul li span { color: #842029; font-weight: 600; }
-
-  .restrict-box .rfooter {
-    font-size: 13.5px;
-    color: #555;
-    margin-top: 9px;
-    padding-top: 9px;
-    border-top: 1px solid #e2e6ea;
-    margin-bottom: 0;
-  }
-
-  /* ============================
-     TURNO PRIORITARIO (inline)
-     ============================ */
-  .turno-bloque {
-    background: #fef9f0;
-    border: 1px solid #fde68a;
-    border-radius: 10px;
-    padding: 18px 18px 14px;
-    margin: 1rem 0 1.5rem;
-  }
-
-  .turno-bloque-titulo {
-    font-size: 16px;
-    font-weight: 700;
-    color: #92400e;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .turno-bloque-titulo i { font-size: 20px; }
-
-  .tipo-consulta-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
-    flex-wrap: wrap;
-  }
-
-  .tipo-consulta-row .tipo-label {
-    font-size: 15px;
-    font-weight: 600;
-    color: #555;
-    margin: 0;
-  }
-
-  .tipo-req { color: #c0392b; font-weight: 800; }
-
-  .tipo-opts { display: flex; gap: 8px; flex-wrap: wrap; }
-
-  .tbtn {
-    padding: 9px 18px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
-    color: #555;
-    background: white;
-    transition: all .15s;
-    user-select: none;
-  }
-
-  .tbtn:hover { border-color: #003366; color: #003366; background: #f0f4f9; }
-  .tbtn.selected { border-color: #003366; color: #003366; background: #e8eef6; font-weight: 600; }
-
-  .tipo-error {
-    display: none;
-    color: #842029;
-    background: #fdecea;
-    border: 1px solid #f5c6cb;
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-size: 14px;
-    margin-bottom: 14px;
-  }
-
-  .tipo-error.show { display: block; }
-
-  .lista-espera-label {
-    display: block;
-    font-size: 15px;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 8px;
-  }
-
-  .lista-espera-aclaracion {
-    font-size: 13px;
-    color: #6c757d;
-    margin: 8px 0 14px;
-    line-height: 1.5;
-  }
-
-  .whatsapp-note {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin: 4px 0 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 14.5px;
-    color: #555;
-  }
-
-  .whatsapp-note i { color: #25d366; font-size: 20px; flex-shrink: 0; margin-top: 2px; }
-  .whatsapp-note a { color: #003366; font-weight: 600; }
-
-  /* Turno prioritario sección standalone */
-  .turno-standalone-intro {
-    font-size: 15px;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
-  }
-
-  /* Consent */
-  .consent-box {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 13px 15px;
-    font-size: 14px;
-    color: #555;
-    line-height: 1.7;
-    margin-bottom: 12px;
-  }
-
-  .consent-box p { margin: 0; }
-  .consent-box p + p { margin-top: 6px; }
-
-  .data-note { font-size: 13.5px; color: #6c757d; margin: 10px 0 1.5rem; line-height: 1.6; }
-
-  .btn-enviar {
-    background: #003366;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 30px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    transition: background .15s;
-  }
-
-  .btn-enviar:hover { background: #002244; color: #fff; }
-  .btn-enviar i { font-size: 18px; }
-
-  .consent-footnote {
-    font-size: 13.5px;
-    color: #6c757d;
-    line-height: 1.6;
-    margin-top: 12px;
-    margin-bottom: 0;
-  }
-
-  .gracias-msg {
-    margin-top: 16px;
-    font-size: 15px;
-    color: #555;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .gracias-msg i { color: #003366; font-size: 18px; }
-
-  hr { border: none; border-top: 1px solid #e2e6ea; margin: 1.25rem 0; }
-
-  @media (max-width: 520px) {
-    .row2 { grid-template-columns: 1fr; }
-    .main-box { padding: 1.25rem 1rem 2rem; }
-    .paciente-row, .visita-row, .tipo-consulta-row { flex-direction: column; align-items: flex-start; }
-    .opcion-card { padding: 14px; gap: 12px; }
-    .opcion-icono { width: 44px; height: 44px; }
-    .opcion-icono i { font-size: 22px; }
-    .opcion-titulo { font-size: 16px; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dr. Daniel Zuin - Formulario de Contacto</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <!-- Script Oficial de Web3Forms -->
+  <script src="https://web3forms.com/client/script.js" async defer></script>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      background: #f5f7fa;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      padding: 1.5rem 1rem;
+    }
+
+    .main-box {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #e2e6ea;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 2rem 2.5rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,.06);
+    }
+
+    .logo-area {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .logo-area img {
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+    }
+
+    h1 {
+      font-size: 23px;
+      font-weight: 700;
+      color: #003366;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .form-subtitle {
+      text-align: center;
+      font-size: 17px;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 4px;
+    }
+
+    .form-desc {
+      font-size: 16px;
+      color: #6c757d;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .alerta-urgencia {
+      background: #fff8e1;
+      border-left: 3px solid #f59e0b;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 15px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .alerta-urgencia i {
+      color: #b45309;
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .alerta-urgencia p {
+      font-size: 15px;
+      color: #7c4f00;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ============================
+       PANTALLA SELECTOR INICIAL
+       ============================ */
+    #pantalla-selector { display: block; }
+
+    .selector-titulo {
+      font-size: 18px;
+      font-weight: 700;
+      color: #003366;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .opciones-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 1.5rem;
+    }
+
+    .opcion-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      border-radius: 10px;
+      border: 2px solid #e2e6ea;
+      cursor: pointer;
+      transition: border-color .15s, background .15s, transform .12s;
+      text-decoration: none;
+      background: white;
+      width: 100%;
+      text-align: left;
+    }
+
+    .opcion-card:hover {
+      border-color: #003366;
+      background: #f0f4f9;
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .opcion-card:active { transform: scale(.99); }
+
+    .opcion-icono {
+      width: 52px;
+      height: 52px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .opcion-icono i { font-size: 26px; }
+
+    .opcion-1 .opcion-icono { background: #e6f4ea; color: #1a7a3d; }
+    .opcion-2 .opcion-icono { background: #fdecea; color: #c0392b; }
+    .opcion-3 .opcion-icono { background: #e8eef6; color: #003366; }
+
+    .opcion-texto { flex: 1; }
+
+    .opcion-titulo {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .opcion-desc {
+      font-size: 14px;
+      color: #6c757d;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .opcion-wsp {
+      font-size: 13px;
+      color: #1a7a3d;
+      font-weight: 600;
+      margin-top: 5px;
+      display: block;
+    }
+
+    .opcion-flecha {
+      font-size: 22px;
+      color: #ced4da;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .opcion-card:hover .opcion-flecha { color: #003366; }
+
+    .badge-urgente {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      background: #dc2626;
+      color: white;
+      border-radius: 6px;
+      padding: 2px 8px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .nota-pie-selector {
+      font-size: 13px;
+      color: #adb5bd;
+      text-align: center;
+      line-height: 1.6;
+      margin-top: .5rem;
+    }
+
+    /* ============================
+       SECCIONES DE FORMULARIO
+       ============================ */
+    #seccion-espera,
+    #seccion-consulta { display: none; }
+
+    .btn-volver {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #003366;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 1.25rem;
+      padding: 0;
+    }
+
+    .btn-volver:hover { text-decoration: underline; }
+    .btn-volver i { font-size: 16px; }
+
+    .intro-text {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-head {
+      font-size: 21px;
+      font-weight: 800;
+      color: #003366;
+      margin: 1.5rem 0 .75rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 3px solid #e2e6ea;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      flex-wrap: wrap;
+    }
+
+    .section-head i { font-size: 24px; }
+
+    .section-req {
+      font-size: 14px;
+      font-weight: 800;
+      color: #ffffff;
+      background: #dc2626;
+      padding: 3px 10px;
+      border-radius: 6px;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+
+    .form-label {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    .form-control, .form-select {
+      font-size: 15px;
+      padding: 10px 13px;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      margin-bottom: 13px;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: #003366;
+      box-shadow: 0 0 0 2px rgba(0,51,102,.12);
+    }
+
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .paciente-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 13px;
+      flex-wrap: wrap;
+    }
+
+    .paciente-row .paciente-label {
+      font-size: 15px;
+      color: #555;
+      margin: 0;
+    }
+
+    .radio-group { display: flex; gap: 8px; }
+
+    .radio-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 20px;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      color: #555;
+      background: white;
+      transition: all .15s;
+      user-select: none;
+    }
+
+    .radio-btn:hover { border-color: #003366; color: #003366; background: #f0f4f9; }
+    .radio-btn.selected { border-color: #003366; color: #003366; background: #e8eef6; font-weight: 600; }
+    .radio-btn i { font-size: 16px; }
+
+    .visita-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 13px;
+      flex-wrap: wrap;
+    }
+
+    .visita-row .visita-label { font-size: 15px; color: #555; margin: 0; }
+    .visita-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .vbtn {
+      padding: 8px 16px;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14.5px;
+      color: #555;
+      background: white;
+      transition: all .15s;
+      user-select: none;
+    }
+
+    .vbtn:hover { border-color: #003366; color: #003366; background: #f0f4f9; }
+    .vbtn.selected { border-color: #003366; color: #003366; background: #e8eef6; font-weight: 600; }
+
+    .visita-hidden { display: none; }
+
+    .form-text { font-size: 13.5px; color: #6c757d; margin-top: -9px; margin-bottom: 14px; }
+
+    .restrict-box {
+      border: 1px solid #f5c6cb;
+      border-radius: 8px;
+      padding: 13px 15px;
+      margin: 1rem 0;
+    }
+
+    .restrict-box .rhead {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #842029;
+      margin-bottom: 9px;
+    }
+
+    .restrict-box .rhead i { font-size: 16px; }
+
+    .restrict-box ul {
+      padding-left: 18px;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .restrict-box ul li span { color: #842029; font-weight: 600; }
+
+    .restrict-box .rfooter {
+      font-size: 13.5px;
+      color: #555;
+      margin-top: 9px;
+      padding-top: 9px;
+      border-top: 1px solid #e2e6ea;
+      margin-bottom: 0;
+    }
+
+    /* ============================
+       TURNO PRIORITARIO (inline)
+       ============================ */
+    .turno-bloque {
+      background: #fef9f0;
+      border: 1px solid #fde68a;
+      border-radius: 10px;
+      padding: 18px 18px 14px;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .turno-bloque-titulo {
+      font-size: 16px;
+      font-weight: 700;
+      color: #92400e;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .turno-bloque-titulo i { font-size: 20px; }
+
+    .tipo-consulta-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .tipo-consulta-row .tipo-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: #555;
+      margin: 0;
+    }
+
+    .tipo-req { color: #c0392b; font-weight: 800; }
+
+    .tipo-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .tbtn {
+      padding: 9px 18px;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      color: #555;
+      background: white;
+      transition: all .15s;
+      user-select: none;
+    }
+
+    .tbtn:hover { border-color: #003366; color: #003366; background: #f0f4f9; }
+    .tbtn.selected { border-color: #003366; color: #003366; background: #e8eef6; font-weight: 600; }
+
+    .tipo-error {
+      display: none;
+      color: #842029;
+      background: #fdecea;
+      border: 1px solid #f5c6cb;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .tipo-error.show { display: block; }
+
+    .lista-espera-label {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .lista-espera-aclaracion {
+      font-size: 13px;
+      color: #6c757d;
+      margin: 8px 0 14px;
+      line-height: 1.5;
+    }
+
+    .whatsapp-note {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 4px 0 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14.5px;
+      color: #555;
+    }
+
+    .whatsapp-note i { color: #25d366; font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .whatsapp-note a { color: #003366; font-weight: 600; }
+
+    /* Turno prioritario sección standalone */
+    .turno-standalone-intro {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Consent */
+    .consent-box {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 13px 15px;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .consent-box p { margin: 0; }
+    .consent-box p + p { margin-top: 6px; }
+
+    .data-note { font-size: 13.5px; color: #6c757d; margin: 10px 0 1.5rem; line-height: 1.6; }
+
+    .btn-enviar {
+      background: #003366;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      transition: background .15s;
+    }
+
+    .btn-enviar:hover { background: #002244; color: #fff; }
+    .btn-enviar i { font-size: 18px; }
+
+    .consent-footnote {
+      font-size: 13.5px;
+      color: #6c757d;
+      line-height: 1.6;
+      margin-top: 12px;
+      margin-bottom: 0;
+    }
+
+    .gracias-msg {
+      margin-top: 16px;
+      font-size: 15px;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .gracias-msg i { color: #003366; font-size: 18px; }
+
+    hr { border: none; border-top: 1px solid #e2e6ea; margin: 1.25rem 0; }
+
+    @media (max-width: 520px) {
+      .row2 { grid-template-columns: 1fr; }
+      .main-box { padding: 1.25rem 1rem 2rem; }
+      .paciente-row, .visita-row, .tipo-consulta-row { flex-direction: column; align-items: flex-start; }
+      .opcion-card { padding: 14px; gap: 12px; }
+      .opcion-icono { width: 44px; height: 44px; }
+      .opcion-icono i { font-size: 22px; }
+      .opcion-titulo { font-size: 16px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -651,12 +652,18 @@
       Complete este formulario para incorporarse a la lista de espera. La asignación de turno no es inmediata y depende exclusivamente de la disponibilidad de agenda del profesional.
     </p>
 
-    <form action="https://formspree.io/f/mbdebwne" method="POST" id="formEspera">
+    <!-- ACTION CAMBIADO A WEB3FORMS -->
+    <form action="https://api.web3forms.com/submit" method="POST" id="formEspera">
 
-      <input type="hidden" name="_subject" id="val_subject_e" value="🔴 PRIORITARIO - Solicitud lista de espera - Dr. Daniel Zuin">
-      <input type="hidden" name="_next" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
-      <input type="hidden" name="_language" value="es">
+      <!-- REEMPLAZA "TU_ACCESS_KEY_AQUÍ" CON TU LLAVE DE WEB3FORMS -->
+      <input type="hidden" name="access_key" value="TU_ACCESS_KEY_AQUÍ">
+      
+      <!-- Configuración dinámica de Web3Forms -->
+      <input type="hidden" name="subject" id="val_subject_e" value="🔴 PRIORITARIO - Solicitud lista de espera - Dr. Daniel Zuin">
+      <input type="hidden" name="redirect" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
+      <input type="hidden" name="from_name" value="Formulario Web - Dr. Zuin">
       <input type="text" name="_gotcha" style="display:none">
+      
       <input type="hidden" name="tipo_formulario" value="Lista de espera prioritaria">
       <input type="hidden" name="tipo_consulta_e" id="val_tipo_consulta_e" value="">
       <input type="hidden" name="lista_espera" value="Sí">
@@ -815,12 +822,18 @@
       Las respuestas serán enviadas por correo electrónico en un plazo estimado de al menos <strong>72 horas hábiles</strong>.
     </p>
 
-    <form action="https://formspree.io/f/mbdebwne" method="POST" id="formZuin">
+    <!-- ACTION CAMBIADO A WEB3FORMS -->
+    <form action="https://api.web3forms.com/submit" method="POST" id="formZuin">
 
-      <input type="hidden" name="_subject" id="val_subject" value="Nueva consulta web - Dr. Daniel Zuin">
-      <input type="hidden" name="_next" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
-      <input type="hidden" name="_language" value="es">
+      <!-- REEMPLAZA "TU_ACCESS_KEY_AQUÍ" CON TU LLAVE DE WEB3FORMS -->
+      <input type="hidden" name="access_key" value="TU_ACCESS_KEY_AQUÍ">
+      
+      <!-- Configuración dinámica de Web3Forms -->
+      <input type="hidden" name="subject" id="val_subject" value="Nueva consulta web - Dr. Daniel Zuin">
+      <input type="hidden" name="redirect" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
+      <input type="hidden" name="from_name" value="Formulario Web - Dr. Zuin">
       <input type="text" name="_gotcha" style="display:none">
+      
       <input type="hidden" name="tipo_formulario" value="Consulta administrativa">
       <input type="hidden" name="Resumen_de_la_consulta" id="val_resumen" value="">
       <input type="hidden" name="es_paciente" id="val_paciente" value="">
@@ -992,18 +1005,14 @@
 
       <hr>
 
-      <!-- DECLARACIÓN -->
       <div class="section-head">
         <i class="ti ti-shield-check" aria-hidden="true"></i> Declaración y consentimiento
       </div>
 
       <div class="consent-box">
         <p>Al enviar este formulario declaro haber leído y comprendido las condiciones de uso del presente canal de contacto.</p>
-        <p>Comprendo que este formulario está destinado exclusivamente a consultas administrativas e información general, que no constituye una consulta médica, no reemplaza la evaluación profesional presencial o por telemedicina y no debe utilizarse para urgencias o emergencias.</p>
-        <p>Autorizo el tratamiento de los datos consignados exclusivamente para la gestión de esta consulta y para eventuales comunicaciones relacionadas con la atención solicitada.</p>
+        <p>Autorizo el tratamiento de los datos consignados exclusivamente para la gestión de esta solicitud. Las respuestas serán enviadas únicamente al correo electrónico informado.</p>
       </div>
-
-      <input type="hidden" name="acepta_condiciones" value="Sí - aceptado al enviar el formulario">
 
       <p class="data-note">Los datos suministrados serán utilizados exclusivamente para responder la consulta realizada y gestionar eventuales comunicaciones relacionadas con la atención solicitada.</p>
 
@@ -1011,10 +1020,8 @@
 
       <button type="submit" class="btn-enviar">
         <i class="ti ti-send" aria-hidden="true"></i>
-        Enviar consulta
+        Enviar consulta administrativa
       </button>
-
-      <p class="consent-footnote">Al hacer clic en <strong>"Enviar consulta"</strong>, usted declara haber leído, comprendido y aceptado las condiciones precedentes.</p>
 
       <div class="gracias-msg">
         <i class="ti ti-heart" aria-hidden="true"></i>
@@ -1022,28 +1029,23 @@
       </div>
 
     </form>
-
   </div><!-- /seccion-consulta -->
 
 </div><!-- /main-box -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ============================
+     CÓDIGO JAVASCRIPT DE CONTROL
+     ============================ -->
 <script>
-
-  /* ============================
-     NAVEGACIÓN ENTRE SECCIONES
-     ============================ */
-  function mostrarSeccion(cual) {
+  function mostrarSeccion(seccion) {
     document.getElementById('pantalla-selector').style.display = 'none';
-    document.getElementById('seccion-espera').style.display = 'none';
-    document.getElementById('seccion-consulta').style.display = 'none';
-    if (cual === 'espera') {
+    if (seccion === 'espera') {
       document.getElementById('seccion-espera').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
+      document.getElementById('val_tipo_consulta_e').value = '';
+    } else if (seccion === 'consulta') {
       document.getElementById('seccion-consulta').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function volverSelector() {
@@ -1053,212 +1055,101 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  /* ============================
-     HELPERS COMPARTIDOS
-     ============================ */
-  function toggleOtraCobertura(sufijo) {
-    var id = sufijo === 'e' ? 'obra_e' : 'obra';
-    var rowId = 'otra-cobertura-row-' + sufijo;
-    var inputId = sufijo === 'e' ? 'otra_cobertura_e' : 'otra_cobertura';
-    var val = document.getElementById(id).value;
-    var row = document.getElementById(rowId);
-    if (val === 'OTRAS') {
-      row.classList.remove('visita-hidden');
+  function toggleOtraCobertura(tipo) {
+    const selectObra = document.getElementById(tipo === 'e' ? 'obra_e' : 'obra');
+    const rowOtra = document.getElementById(tipo === 'e' ? 'otra-cobertura-row-e' : 'otra-cobertura-row-c');
+    
+    if (selectObra.value === 'OTRAS') {
+      rowOtra.classList.remove('visita-hidden');
     } else {
-      row.classList.add('visita-hidden');
-      document.getElementById(inputId).value = '';
+      rowOtra.classList.add('visita-hidden');
     }
   }
 
-  function setTipoConsulta(sufijo, el, val) {
-    var hiddenId = sufijo === 'e' ? 'val_tipo_consulta_e' : 'val_tipo_consulta';
-    document.getElementById(hiddenId).value = val;
-    var prefix = sufijo === 'e' ? '-e' : '-c';
-    document.querySelectorAll('#btn-primera' + prefix + ', #btn-ulterior' + prefix).forEach(function(b) {
-      b.classList.remove('selected');
-    });
-    el.classList.add('selected');
-  }
+  function setTipoConsulta(tipoForm, elemento, valor) {
+    const contenedor = elemento.parentElement;
+    contenedor.querySelectorAll('.tbtn').forEach(btn => btn.classList.remove('selected'));
+    elemento.classList.add('selected');
 
-  /* ============================
-     FORMULARIO ESPERA
-     ============================ */
-  var listaEsperaE = 'Sí'; // default: sí (ya preseleccionado)
-
-  function setListaEsperaE(val) {
-    listaEsperaE = val;
-    document.getElementById('btn-espera-si-e').classList.toggle('selected', val === 'Sí');
-    document.getElementById('btn-espera-no-e').classList.toggle('selected', val === 'No');
-  }
-
-  document.getElementById('formEspera').addEventListener('submit', function(e) {
-
-    var nombre    = document.getElementById('nombre_e').value.trim();
-    var dni       = document.getElementById('dni_e').value.trim();
-    var edad      = document.getElementById('edad_e').value.trim();
-    var telefono  = document.getElementById('tel_e').value.trim();
-    var email     = document.getElementById('email_e').value.trim();
-    var obra      = document.getElementById('obra_e').value;
-    var otraCob   = document.getElementById('otra_cobertura_e').value.trim();
-    var tipo      = document.getElementById('val_tipo_consulta_e').value;
-    var motivo    = document.getElementById('motivo_e').value;
-    var otroMot   = document.getElementById('otro_e').value.trim();
-    var mensaje   = document.getElementById('msg_e').value.trim();
-
-    if (obra === 'OTRAS' && otraCob) obra = 'Otras: ' + otraCob;
-
-    var whatsappLink = '';
-    if (telefono) {
-      var digits = telefono.replace(/\D/g, '');
-      if (digits.charAt(0) === '0') digits = digits.substring(1);
-      if (digits.substring(0, 2) !== '54') digits = '549' + digits;
-      whatsappLink = 'https://wa.me/' + digits;
-    }
-
-    var lineas = [];
-    lineas.push('===== SOLICITUD DE TURNO - LISTA DE ESPERA =====');
-    lineas.push('Nombre: ' + (nombre || '-'));
-    lineas.push('Email: ' + (email || '-'));
-    lineas.push('Teléfono: ' + (telefono || '-') + (whatsappLink ? ' (WhatsApp: ' + whatsappLink + ')' : ''));
-    lineas.push('Edad: ' + (edad || '-'));
-    lineas.push('DNI: ' + (dni || '-'));
-    lineas.push('Cobertura: ' + (obra || '-'));
-    lineas.push('Tipo de consulta: ' + (tipo || '-'));
-    lineas.push('Lista de espera: SÍ ⚠️');
-    lineas.push('Motivo: ' + (motivo || '-'));
-    if (otroMot) lineas.push('Otro motivo: ' + otroMot);
-    if (mensaje) lineas.push('Comentarios: ' + mensaje);
-
-    document.getElementById('val_resumen_e').value = lineas.join('\n');
-    document.getElementById('val_subject_e').value = '🔴 PRIORITARIO - ' + (tipo ? tipo + ' - ' : '') + 'Lista de espera - Dr. Daniel Zuin';
-
-    // Envío paralelo a Web3Forms
-    try {
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
-          subject: document.getElementById('val_subject_e').value,
-          from_name: 'Formulario web - Dr. Daniel Zuin',
-          Resumen: lineas.join('\n')
-        }),
-        keepalive: true
-      }).catch(function(err) { console.log('Web3Forms:', err); });
-    } catch(e2) { console.log(e2); }
-  });
-
-  /* ============================
-     FORMULARIO CONSULTA
-     ============================ */
-  function setPaciente(val) {
-    document.getElementById('val_paciente').value = val;
-    document.getElementById('btn-si').classList.toggle('selected', val === 'Sí');
-    document.getElementById('btn-no').classList.toggle('selected', val === 'No');
-    var vrow = document.getElementById('visita-row');
-    if (val === 'Sí') {
-      vrow.classList.remove('visita-hidden');
+    if (tipoForm === 'e') {
+      document.getElementById('val_tipo_consulta_e').value = valor;
+      // Actualizar dinámicamente el asunto para Web3Forms en base a la selección
+      document.getElementById('val_subject_e').value = `PACIENTES PARA ADELANTAR - ${valor} - Lista de espera - Dr. Daniel Zuin`;
     } else {
-      vrow.classList.add('visita-hidden');
+      document.getElementById('val_tipo_consulta').value = valor;
+    }
+  }
+
+  function setListaEsperaE(valor) {
+    const btnSi = document.getElementById('btn-espera-si-e');
+    const btnNo = document.getElementById('btn-espera-no-e');
+    if (valor === 'No') {
+      btnNo.classList.add('selected');
+      btnSi.classList.remove('selected');
+      if(confirm('Esta sección es específica para Lista de Espera. ¿Desea ir a Consultas Administrativas generales?')) {
+        mostrarSeccion('consulta');
+      }
+    }
+  }
+
+  function setListaEsperaC(valor) {
+    const btnSi = document.getElementById('btn-espera-si-c');
+    const btnNo = document.getElementById('btn-espera-no-c');
+    document.getElementById('val_lista_espera').value = valor;
+
+    if (valor === 'Sí') {
+      btnSi.classList.add('selected');
+      btnNo.classList.remove('selected');
+    } else {
+      btnNo.classList.add('selected');
+      btnSi.classList.remove('selected');
+    }
+  }
+
+  function setPaciente(valor) {
+    const btnSi = document.getElementById('btn-si');
+    const btnNo = document.getElementById('btn-no');
+    const rowVisita = document.getElementById('visita-row');
+    
+    document.getElementById('val_paciente').value = valor;
+
+    if (valor === 'Sí') {
+      btnSi.classList.add('selected');
+      btnNo.classList.remove('selected');
+      rowVisita.classList.remove('visita-hidden');
+    } else {
+      btnNo.classList.add('selected');
+      btnSi.classList.remove('selected');
+      rowVisita.classList.add('visita-hidden');
       document.getElementById('val_visita').value = '';
-      document.querySelectorAll('.vbtn').forEach(function(b) { b.classList.remove('selected'); });
+      rowVisita.querySelectorAll('.vbtn').forEach(btn => btn.classList.remove('selected'));
     }
   }
 
-  function setVisita(el, val) {
-    document.getElementById('val_visita').value = val;
-    document.querySelectorAll('.vbtn').forEach(function(b) { b.classList.remove('selected'); });
-    el.classList.add('selected');
+  function setVisita(elemento, valor) {
+    const contenedor = elemento.parentElement;
+    contenedor.querySelectorAll('.vbtn').forEach(btn => btn.classList.remove('selected'));
+    elemento.classList.add('selected');
+    document.getElementById('val_visita').value = valor;
   }
 
-  function setListaEsperaC(val) {
-    document.getElementById('val_lista_espera').value = val;
-    document.getElementById('btn-espera-si-c').classList.toggle('selected', val === 'Sí');
-    document.getElementById('btn-espera-no-c').classList.toggle('selected', val === 'No');
-  }
-
-  document.getElementById('formZuin').addEventListener('submit', function() {
-    var nombre   = document.getElementById('nombre').value.trim();
-    var dni      = document.getElementById('dni').value.trim();
-    var edad     = document.getElementById('edad').value.trim();
-    var telefono = document.getElementById('tel').value.trim();
-    var email    = document.getElementById('email').value.trim();
-    var obra     = document.getElementById('obra').value;
-    var otraCob  = document.getElementById('otra_cobertura').value.trim();
-    var paciente = document.getElementById('val_paciente').value;
-    var visita   = document.getElementById('val_visita').value;
-    var asunto   = document.getElementById('asunto').value.trim();
-    var mensaje  = document.getElementById('msg').value.trim();
-    var listaEsp = document.getElementById('val_lista_espera').value;
-    var tipo     = document.getElementById('val_tipo_consulta').value;
-    var motivo   = document.getElementById('val_motivo').value;
-    var otroMot  = document.getElementById('val_otro_motivo').value;
-
-    if (obra === 'OTRAS' && otraCob) obra = 'Otras: ' + otraCob;
-
-    var whatsappLink = '';
-    if (telefono) {
-      var digits = telefono.replace(/\D/g, '');
-      if (digits.charAt(0) === '0') digits = digits.substring(1);
-      if (digits.substring(0, 2) !== '54') digits = '549' + digits;
-      whatsappLink = 'https://wa.me/' + digits;
-    }
-
-    var lineas = [];
-    lineas.push('===== DATOS DEL PACIENTE =====');
-    lineas.push('Nombre: ' + (nombre || '-'));
-    lineas.push('Email: ' + (email || '-'));
-    lineas.push('Teléfono: ' + (telefono || '-') + (whatsappLink ? ' (WhatsApp: ' + whatsappLink + ')' : ''));
-    lineas.push('Edad: ' + (edad || '-'));
-    lineas.push('Cobertura: ' + (obra || '-'));
-    lineas.push('Tipo de consulta: ' + (tipo || 'No indicado'));
-    if (paciente === 'Sí') {
-      lineas.push('¿Es paciente del Dr. Zuin?: Sí');
-      lineas.push('Última visita: ' + (visita || 'No indicado'));
-    } else if (paciente === 'No') {
-      lineas.push('¿Es paciente del Dr. Zuin?: No');
-    } else {
-      lineas.push('¿Es paciente del Dr. Zuin?: No indicado');
-    }
-    lineas.push('DNI: ' + (dni || '-'));
-    lineas.push('');
-    lineas.push('===== MENSAJE =====');
-    lineas.push('Asunto: ' + (asunto || '-'));
-    lineas.push('Mensaje: ' + (mensaje || '-'));
-    lineas.push('');
-    lineas.push('===== TURNO =====');
-    lineas.push('Lista de espera para turno anticipado: ' + (listaEsp === 'Sí' ? 'SÍ ⚠️' : 'No'));
-    lineas.push('Motivo principal: ' + (motivo || 'No indicado'));
-    if (otroMot) lineas.push('Otro motivo: ' + otroMot);
-
-    document.getElementById('val_resumen').value = lineas.join('\n');
-
-    var subjectInput = document.getElementById('val_subject');
-    var esPrioritaria = listaEsp === 'Sí';
-    var base = 'Nueva consulta web - Dr. Daniel Zuin';
-    if (esPrioritaria) {
-      var prefijo = '🔴 PRIORITARIO' + (tipo ? ' - ' + tipo : '');
-      subjectInput.value = prefijo + ' - ' + base;
-    } else {
-      subjectInput.value = base;
-    }
-
-    // Envío paralelo a Web3Forms
-    try {
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
-          subject: subjectInput.value,
-          from_name: 'Formulario web - Dr. Daniel Zuin',
-          Resumen_de_la_consulta: lineas.join('\n')
-        }),
-        keepalive: true
-      }).catch(function(err) { console.log('Web3Forms:', err); });
-    } catch(e2) { console.log(e2); }
+  // Interceptores pre-envío ajustados a la nomenclatura Web3Forms
+  document.getElementById('formEspera').addEventListener('submit', function(e) {
+    const nombre = document.getElementById('nombre_e').value;
+    const motivo = document.getElementById('motivo_e').value;
+    const tipoC = document.getElementById('val_tipo_consulta_e').value || 'No especificado';
+    
+    document.getElementById('val_resumen_e').value = `Solicitud de Lista de Espera Prioritaria para ${nombre}. Motivo: ${motivo}. Tipo: ${tipoC}.`;
   });
 
+  document.getElementById('formZuin').addEventListener('submit', function(e) {
+    const asunto = document.getElementById('asunto').value || 'Sin Asunto';
+    const esPaciente = document.getElementById('val_paciente').value || 'No especificado';
+    const quiereTurno = document.getElementById('val_lista_espera').value;
+    
+    document.getElementById('val_resumen').value = `Consulta General: ${asunto}. ¿Es paciente?: ${esPaciente}. ¿Añadir a lista de espera?: ${quiereTurno}.`;
+  });
 </script>
+
 </body>
 </html>
