@@ -651,9 +651,8 @@
       Complete este formulario para incorporarse a la lista de espera. La asignación de turno no es inmediata y depende exclusivamente de la disponibilidad de agenda del profesional.
     </p>
 
-    <form action="https://api.web3forms.com/submit" method="POST" id="formEspera">
+    <form action="https://formspree.io/f/mbdebwne" method="POST" id="formEspera">
 
-      <input type="hidden" name="access_key" value="643eb3bc-99c6-46b9-9292-940724a904bd">
       <input type="hidden" name="_subject" id="val_subject_e" value="🔴 PRIORITARIO - Solicitud lista de espera - Dr. Daniel Zuin">
       <input type="hidden" name="_next" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
       <input type="hidden" name="_language" value="es">
@@ -783,6 +782,8 @@
 
       <p class="data-note">Los datos suministrados serán utilizados exclusivamente para responder la consulta realizada y gestionar eventuales comunicaciones relacionadas con la atención solicitada.</p>
 
+      <div class="h-captcha" data-captcha="true"></div>
+
       <button type="submit" class="btn-enviar">
         <i class="ti ti-send" aria-hidden="true"></i>
         Enviar solicitud prioritaria
@@ -814,9 +815,8 @@
       Las respuestas serán enviadas por correo electrónico en un plazo estimado de al menos <strong>72 horas hábiles</strong>.
     </p>
 
-    <form action="https://api.web3forms.com/submit" method="POST" id="formZuin">
+    <form action="https://formspree.io/f/mbdebwne" method="POST" id="formZuin">
 
-      <input type="hidden" name="access_key" value="643eb3bc-99c6-46b9-9292-940724a904bd">
       <input type="hidden" name="_subject" id="val_subject" value="Nueva consulta web - Dr. Daniel Zuin">
       <input type="hidden" name="_next" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
       <input type="hidden" name="_language" value="es">
@@ -1007,6 +1007,8 @@
 
       <p class="data-note">Los datos suministrados serán utilizados exclusivamente para responder la consulta realizada y gestionar eventuales comunicaciones relacionadas con la atención solicitada.</p>
 
+      <div class="h-captcha" data-captcha="true"></div>
+
       <button type="submit" class="btn-enviar">
         <i class="ti ti-send" aria-hidden="true"></i>
         Enviar consulta
@@ -1090,7 +1092,6 @@
   }
 
   document.getElementById('formEspera').addEventListener('submit', function(e) {
-    e.preventDefault();
 
     var nombre    = document.getElementById('nombre_e').value.trim();
     var dni       = document.getElementById('dni_e').value.trim();
@@ -1128,39 +1129,23 @@
     if (otroMot) lineas.push('Otro motivo: ' + otroMot);
     if (mensaje) lineas.push('Comentarios: ' + mensaje);
 
-    var subject = '🔴 PRIORITARIO - ' + (tipo ? tipo + ' - ' : '') + 'Lista de espera - Dr. Daniel Zuin';
+    document.getElementById('val_resumen_e').value = lineas.join('\n');
+    document.getElementById('val_subject_e').value = '🔴 PRIORITARIO - ' + (tipo ? tipo + ' - ' : '') + 'Lista de espera - Dr. Daniel Zuin';
 
-    var btnEnviar = this.querySelector('button[type="submit"]');
-    btnEnviar.disabled = true;
-    btnEnviar.innerHTML = '<i class="ti ti-loader" aria-hidden="true"></i> Enviando...';
-
-    var formData = new FormData();
-    formData.append('access_key', '643eb3bc-99c6-46b9-9292-940724a904bd');
-    formData.append('_subject', subject);
-    formData.append('_next', 'https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html');
-    formData.append('from_name', nombre || 'Paciente');
-    formData.append('email', email);
-    formData.append('Resumen_de_la_consulta', lineas.join('\n'));
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      body: formData
-    })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      if (data.success) {
-        window.location.replace('https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html');
-      } else {
-        alert('Hubo un error al enviar. Por favor intente nuevamente.');
-        btnEnviar.disabled = false;
-        btnEnviar.innerHTML = '<i class="ti ti-send" aria-hidden="true"></i> Enviar solicitud prioritaria';
-      }
-    })
-    .catch(function() {
-      alert('Error de conexión. Por favor intente nuevamente.');
-      btnEnviar.disabled = false;
-      btnEnviar.innerHTML = '<i class="ti ti-send" aria-hidden="true"></i> Enviar solicitud prioritaria';
-    });
+    // Envío paralelo a Web3Forms
+    try {
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
+          subject: document.getElementById('val_subject_e').value,
+          from_name: 'Formulario web - Dr. Daniel Zuin',
+          Resumen: lineas.join('\n')
+        }),
+        keepalive: true
+      }).catch(function(err) { console.log('Web3Forms:', err); });
+    } catch(e2) { console.log(e2); }
   });
 
   /* ============================
@@ -1192,9 +1177,7 @@
     document.getElementById('btn-espera-no-c').classList.toggle('selected', val === 'No');
   }
 
-  document.getElementById('formZuin').addEventListener('submit', function(e) {
-    e.preventDefault();
-
+  document.getElementById('formZuin').addEventListener('submit', function() {
     var nombre   = document.getElementById('nombre').value.trim();
     var dni      = document.getElementById('dni').value.trim();
     var edad     = document.getElementById('edad').value.trim();
@@ -1248,43 +1231,32 @@
     lineas.push('Motivo principal: ' + (motivo || 'No indicado'));
     if (otroMot) lineas.push('Otro motivo: ' + otroMot);
 
+    document.getElementById('val_resumen').value = lineas.join('\n');
+
+    var subjectInput = document.getElementById('val_subject');
     var esPrioritaria = listaEsp === 'Sí';
     var base = 'Nueva consulta web - Dr. Daniel Zuin';
-    var subject = esPrioritaria
-      ? '🔴 PRIORITARIO' + (tipo ? ' - ' + tipo : '') + ' - ' + base
-      : (tipo ? tipo + ' - ' : '') + base;
+    if (esPrioritaria) {
+      var prefijo = '🔴 PRIORITARIO' + (tipo ? ' - ' + tipo : '');
+      subjectInput.value = prefijo + ' - ' + base;
+    } else {
+      subjectInput.value = base;
+    }
 
-    var btnEnviar = this.querySelector('button[type="submit"]');
-    btnEnviar.disabled = true;
-    btnEnviar.innerHTML = '<i class="ti ti-loader" aria-hidden="true"></i> Enviando...';
-
-    var formData = new FormData();
-    formData.append('access_key', '643eb3bc-99c6-46b9-9292-940724a904bd');
-    formData.append('_subject', subject);
-    formData.append('_next', 'https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html');
-    formData.append('from_name', nombre || 'Paciente');
-    formData.append('email', email);
-    formData.append('Resumen_de_la_consulta', lineas.join('\n'));
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      body: formData
-    })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      if (data.success) {
-        window.location.replace('https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html');
-      } else {
-        alert('Hubo un error al enviar. Por favor intente nuevamente.');
-        btnEnviar.disabled = false;
-        btnEnviar.innerHTML = '<i class="ti ti-send" aria-hidden="true"></i> Enviar consulta';
-      }
-    })
-    .catch(function() {
-      alert('Error de conexión. Por favor intente nuevamente.');
-      btnEnviar.disabled = false;
-      btnEnviar.innerHTML = '<i class="ti ti-send" aria-hidden="true"></i> Enviar consulta';
-    });
+    // Envío paralelo a Web3Forms
+    try {
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
+          subject: subjectInput.value,
+          from_name: 'Formulario web - Dr. Daniel Zuin',
+          Resumen_de_la_consulta: lineas.join('\n')
+        }),
+        keepalive: true
+      }).catch(function(err) { console.log('Web3Forms:', err); });
+    } catch(e2) { console.log(e2); }
   });
 
 </script>
