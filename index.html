@@ -1134,17 +1134,17 @@
     btnEnviar.disabled = true;
     btnEnviar.innerHTML = '<i class="ti ti-loader" aria-hidden="true"></i> Enviando...';
 
+    var formData = new FormData();
+    formData.append('access_key', '643eb3bc-99c6-46b9-9292-940724a904bd');
+    formData.append('_subject', subject);
+    formData.append('_next', 'https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html');
+    formData.append('from_name', nombre || 'Paciente');
+    formData.append('email', email);
+    formData.append('Resumen_de_la_consulta', lineas.join('\n'));
+
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
-        subject: subject,
-        from_name: nombre || 'Paciente',
-        email: email,
-        Resumen_de_la_consulta: lineas.join('\n'),
-        _next: 'https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html'
-      })
+      body: formData
     })
     .then(function(res) { return res.json(); })
     .then(function(data) {
@@ -1258,17 +1258,17 @@
     btnEnviar.disabled = true;
     btnEnviar.innerHTML = '<i class="ti ti-loader" aria-hidden="true"></i> Enviando...';
 
+    var formData = new FormData();
+    formData.append('access_key', '643eb3bc-99c6-46b9-9292-940724a904bd');
+    formData.append('_subject', subject);
+    formData.append('_next', 'https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html');
+    formData.append('from_name', nombre || 'Paciente');
+    formData.append('email', email);
+    formData.append('Resumen_de_la_consulta', lineas.join('\n'));
+
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
-        subject: subject,
-        from_name: nombre || 'Paciente',
-        email: email,
-        Resumen_de_la_consulta: lineas.join('\n'),
-        _next: 'https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html'
-      })
+      body: formData
     })
     .then(function(res) { return res.json(); })
     .then(function(data) {
