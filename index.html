@@ -6,6 +6,7 @@
 <title>Dr. Daniel Zuin - Formulario de Contacto</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<script src="https://web3forms.com/client/script.js" async defer></script>
 <style>
   * { box-sizing: border-box; }
 
@@ -65,7 +66,7 @@
     border-left: 3px solid #f59e0b;
     border-radius: 0 8px 8px 0;
     padding: 12px 15px;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
     display: flex;
     gap: 10px;
     align-items: flex-start;
@@ -85,6 +86,147 @@
     margin: 0;
   }
 
+  /* ============================
+     PANTALLA SELECTOR INICIAL
+     ============================ */
+  #pantalla-selector { display: block; }
+
+  .selector-titulo {
+    font-size: 18px;
+    font-weight: 700;
+    color: #003366;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .opciones-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 1.5rem;
+  }
+
+  .opcion-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border-radius: 10px;
+    border: 2px solid #e2e6ea;
+    cursor: pointer;
+    transition: border-color .15s, background .15s, transform .12s;
+    text-decoration: none;
+    background: white;
+    width: 100%;
+    text-align: left;
+  }
+
+  .opcion-card:hover {
+    border-color: #003366;
+    background: #f0f4f9;
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+
+  .opcion-card:active { transform: scale(.99); }
+
+  .opcion-icono {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .opcion-icono i { font-size: 26px; }
+
+  .opcion-1 .opcion-icono { background: #e6f4ea; color: #1a7a3d; }
+  .opcion-2 .opcion-icono { background: #fdecea; color: #c0392b; }
+  .opcion-3 .opcion-icono { background: #e8eef6; color: #003366; }
+
+  .opcion-texto { flex: 1; }
+
+  .opcion-titulo {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+    line-height: 1.3;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .opcion-desc {
+    font-size: 14px;
+    color: #6c757d;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .opcion-wsp {
+    font-size: 13px;
+    color: #1a7a3d;
+    font-weight: 600;
+    margin-top: 5px;
+    display: block;
+  }
+
+  .opcion-flecha {
+    font-size: 22px;
+    color: #ced4da;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .opcion-card:hover .opcion-flecha { color: #003366; }
+
+  .badge-urgente {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    background: #dc2626;
+    color: white;
+    border-radius: 6px;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+
+  .nota-pie-selector {
+    font-size: 13px;
+    color: #adb5bd;
+    text-align: center;
+    line-height: 1.6;
+    margin-top: .5rem;
+  }
+
+  /* ============================
+     SECCIONES DE FORMULARIO
+     ============================ */
+  #seccion-espera,
+  #seccion-consulta { display: none; }
+
+  .btn-volver {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #003366;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 1.25rem;
+    padding: 0;
+  }
+
+  .btn-volver:hover { text-decoration: underline; }
+  .btn-volver i { font-size: 16px; }
+
   .intro-text {
     font-size: 15px;
     color: #555;
@@ -92,7 +234,6 @@
     margin-bottom: 1.5rem;
   }
 
-  /* Títulos de sección: aumentados para mejor visibilidad (adultos mayores) */
   .section-head {
     font-size: 21px;
     font-weight: 800;
@@ -142,7 +283,6 @@
 
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-  /* Paciente sí/no */
   .paciente-row {
     display: flex;
     align-items: center;
@@ -155,7 +295,6 @@
     font-size: 15px;
     color: #555;
     margin: 0;
-    white-space: nowrap;
   }
 
   .radio-group { display: flex; gap: 8px; }
@@ -179,7 +318,6 @@
   .radio-btn.selected { border-color: #003366; color: #003366; background: #e8eef6; font-weight: 600; }
   .radio-btn i { font-size: 16px; }
 
-  /* Última visita */
   .visita-row {
     display: flex;
     align-items: center;
@@ -188,13 +326,7 @@
     flex-wrap: wrap;
   }
 
-  .visita-row .visita-label {
-    font-size: 15px;
-    color: #555;
-    margin: 0;
-    white-space: nowrap;
-  }
-
+  .visita-row .visita-label { font-size: 15px; color: #555; margin: 0; }
   .visita-opts { display: flex; gap: 8px; flex-wrap: wrap; }
 
   .vbtn {
@@ -214,44 +346,7 @@
 
   .visita-hidden { display: none; }
 
-  .form-check {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 13px;
-    padding: 0;
-  }
-
-  .form-check-input {
-    width: 17px;
-    height: 17px;
-    margin-top: 3px;
-    accent-color: #003366;
-    flex-shrink: 0;
-    cursor: pointer;
-  }
-
-  .form-check-label {
-    font-size: 15px;
-    color: #555;
-    line-height: 1.6;
-    cursor: pointer;
-  }
-
-  .whatsapp-note {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin: 4px 0 1.25rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 15px;
-    color: #555;
-  }
-
-  .whatsapp-note i { color: #25d366; font-size: 20px; flex-shrink: 0; margin-top: 2px; }
-  .whatsapp-note a { color: #003366; font-weight: 600; }
+  .form-text { font-size: 13.5px; color: #6c757d; margin-top: -9px; margin-bottom: 14px; }
 
   .restrict-box {
     border: 1px solid #f5c6cb;
@@ -291,6 +386,115 @@
     margin-bottom: 0;
   }
 
+  /* ============================
+     TURNO PRIORITARIO (inline)
+     ============================ */
+  .turno-bloque {
+    background: #fef9f0;
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    padding: 18px 18px 14px;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .turno-bloque-titulo {
+    font-size: 16px;
+    font-weight: 700;
+    color: #92400e;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .turno-bloque-titulo i { font-size: 20px; }
+
+  .tipo-consulta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .tipo-consulta-row .tipo-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #555;
+    margin: 0;
+  }
+
+  .tipo-req { color: #c0392b; font-weight: 800; }
+
+  .tipo-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .tbtn {
+    padding: 9px 18px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #555;
+    background: white;
+    transition: all .15s;
+    user-select: none;
+  }
+
+  .tbtn:hover { border-color: #003366; color: #003366; background: #f0f4f9; }
+  .tbtn.selected { border-color: #003366; color: #003366; background: #e8eef6; font-weight: 600; }
+
+  .tipo-error {
+    display: none;
+    color: #842029;
+    background: #fdecea;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+
+  .tipo-error.show { display: block; }
+
+  .lista-espera-label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+  }
+
+  .lista-espera-aclaracion {
+    font-size: 13px;
+    color: #6c757d;
+    margin: 8px 0 14px;
+    line-height: 1.5;
+  }
+
+  .whatsapp-note {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 4px 0 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14.5px;
+    color: #555;
+  }
+
+  .whatsapp-note i { color: #25d366; font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .whatsapp-note a { color: #003366; font-weight: 600; }
+
+  /* Turno prioritario sección standalone */
+  .turno-standalone-intro {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Consent */
   .consent-box {
     background: #f8f9fa;
     border-radius: 8px;
@@ -304,7 +508,6 @@
   .consent-box p { margin: 0; }
   .consent-box p + p { margin-top: 6px; }
 
-  .form-text { font-size: 13.5px; color: #6c757d; margin-top: -9px; margin-bottom: 14px; }
   .data-note { font-size: 13.5px; color: #6c757d; margin: 10px 0 1.5rem; line-height: 1.6; }
 
   .btn-enviar {
@@ -346,142 +549,14 @@
 
   hr { border: none; border-top: 1px solid #e2e6ea; margin: 1.25rem 0; }
 
-  /* Botón para abrir el turno prioritario (ventana emergente) */
-  .btn-turno {
-    background: #dc2626;
-    border: 3px solid #991b1b;
-    color: #ffffff;
-    border-radius: 10px;
-    padding: 20px 22px;
-    font-size: 21px;
-    font-weight: 800;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    cursor: pointer;
-    margin: 1.5rem 0;
-    box-shadow: 0 4px 14px rgba(220,38,38,.5);
-    transition: background .15s, transform .15s;
-    animation: pulse-turno 2.2s infinite;
-  }
-
-  .btn-turno:hover { background: #b91c1c; transform: translateY(-1px); }
-  .btn-turno i { font-size: 26px; }
-
-  @keyframes pulse-turno {
-    0%   { box-shadow: 0 4px 14px rgba(220,38,38,.5); }
-    50%  { box-shadow: 0 4px 24px rgba(220,38,38,.9); }
-    100% { box-shadow: 0 4px 14px rgba(220,38,38,.5); }
-  }
-
-  .turno-flecha {
-    text-align: center;
-    margin: -10px 0 6px;
-    font-size: 26px;
-    line-height: 1;
-    color: #dc2626;
-    animation: bounce-flecha 1.4s infinite;
-  }
-
-  @keyframes bounce-flecha {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-  }
-
-  .turno-resumen {
-    font-size: 14.5px;
-    color: #555;
-    text-align: center;
-    margin-top: -6px;
-    margin-bottom: 1rem;
-  }
-
-  /* Modal: título más grande también */
-  .lista-espera-row {
-    margin-bottom: 16px;
-  }
-
-  .lista-espera-label {
-    display: block;
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 8px;
-  }
-
-  .lista-espera-aclaracion {
-    font-size: 13.5px;
-    color: #6c757d;
-    margin: 8px 0 0;
-    line-height: 1.5;
-  }
-
-  .tipo-consulta-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-  }
-
-  .tipo-consulta-row .tipo-label {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-    margin: 0;
-    white-space: nowrap;
-  }
-
-  .tipo-req { color: #c0392b; font-weight: 800; }
-
-  .tipo-error {
-    display: none;
-    color: #842029;
-    background: #fdecea;
-    border: 1px solid #f5c6cb;
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-size: 14px;
-    margin: -6px 0 16px;
-  }
-
-  .tipo-error.show { display: block; }
-
-  .tipo-opts { display: flex; gap: 8px; flex-wrap: wrap; }
-
-  .tbtn {
-    padding: 9px 18px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 15px;
-    color: #555;
-    background: white;
-    transition: all .15s;
-    user-select: none;
-  }
-
-  .tbtn:hover { border-color: #003366; color: #003366; background: #f0f4f9; }
-  .tbtn.selected { border-color: #003366; color: #003366; background: #e8eef6; font-weight: 600; }
-
-  .modal-title {
-    font-size: 19px;
-    font-weight: 700;
-    color: #003366;
-  }
-
-  .modal-body label,
-  .modal-body span.visita-label-modal,
-  .modal-body span.paciente-label {
-    font-size: 16px;
-  }
-
   @media (max-width: 520px) {
     .row2 { grid-template-columns: 1fr; }
     .main-box { padding: 1.25rem 1rem 2rem; }
-    .paciente-row, .visita-row { flex-direction: column; align-items: flex-start; }
+    .paciente-row, .visita-row, .tipo-consulta-row { flex-direction: column; align-items: flex-start; }
+    .opcion-card { padding: 14px; gap: 12px; }
+    .opcion-icono { width: 44px; height: 44px; }
+    .opcion-icono i { font-size: 22px; }
+    .opcion-titulo { font-size: 16px; }
   }
 </style>
 </head>
@@ -494,223 +569,403 @@
   </div>
 
   <h1>Dr. Daniel Zuin</h1>
-  <p class="form-subtitle">Formulario de contacto</p>
-  <p class="form-desc">Consultas administrativas e información general sobre atención neurológica. Pedido de turno prioritario.</p>
+  <p class="form-subtitle">Neurología</p>
+  <p class="form-desc">Portal de atención y consultas</p>
 
   <div class="alerta-urgencia">
     <i class="ti ti-alert-triangle" aria-hidden="true"></i>
-    <p><strong>Urgencias médicas:</strong> no utilice este formulario. Comuníquese con los servicios de emergencia o concurra a la guardia hospitalaria más cercana. Este canal no está destinado a la atención de urgencias ni emergencias médicas.</p>
+    <p><strong>Urgencias médicas:</strong> no utilice este portal. Comuníquese con los servicios de emergencia o concurra a la guardia hospitalaria más cercana. Este canal no está destinado a la atención de urgencias ni emergencias médicas.</p>
   </div>
 
-  <p class="intro-text">
-    Este formulario está destinado exclusivamente a consultas administrativas, solicitudes de información general y dudas relacionadas con el proceso de atención neurológica.
-    Las respuestas serán enviadas por correo electrónico en un plazo estimado de al menos <strong>72 horas hábiles</strong>.
-  </p>
+  <!-- ============================
+       PANTALLA SELECTOR INICIAL
+       ============================ -->
+  <div id="pantalla-selector">
 
-  <form action="https://formspree.io/f/mbdebwne" method="POST" id="formZuin">
+    <p class="selector-titulo">¿En qué podemos ayudarle?</p>
 
-    <input type="hidden" name="_subject" id="val_subject" value="Nueva consulta web - Dr. Daniel Zuin">
-    <input type="hidden" name="_next" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
-    <input type="hidden" name="_language" value="es">
-    <input type="text" name="_gotcha" style="display:none">
-    <input type="hidden" name="Resumen_de_la_consulta" id="val_resumen" value="">
-    <input type="hidden" name="es_paciente" id="val_paciente" value="">
-    <input type="hidden" name="ultima_visita" id="val_visita" value="">
-    <input type="hidden" name="lista_espera_txt" id="val_lista_espera" value="No">
-    <input type="hidden" name="tipo_consulta" id="val_tipo_consulta" value="">
-    <input type="hidden" name="motivo" id="val_motivo" value="">
-    <input type="hidden" name="otro_motivo" id="val_otro_motivo" value="">
+    <div class="opciones-grid">
 
-    <!-- DATOS DEL PACIENTE -->
+      <!-- Opción 1: Turno normal → WhatsApp -->
+      <a class="opcion-card opcion-1" href="https://wa.me/5492612085393" target="_blank" rel="noopener">
+        <div class="opcion-icono">
+          <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
+        </div>
+        <div class="opcion-texto">
+          <div class="opcion-titulo">Solicitar turno</div>
+          <p class="opcion-desc">Solicite un turno a través de WhatsApp. Atención rápida y directa con el equipo administrativo.</p>
+          <span class="opcion-wsp"><i class="ti ti-arrow-right" style="font-size:13px;vertical-align:-1px;" aria-hidden="true"></i> Abrir WhatsApp: 261 208-5393</span>
+        </div>
+        <i class="ti ti-chevron-right opcion-flecha" aria-hidden="true"></i>
+      </a>
+
+      <!-- Opción 2: Lista de espera prioritaria -->
+      <button type="button" class="opcion-card opcion-2" onclick="mostrarSeccion('espera')">
+        <div class="opcion-icono">
+          <i class="ti ti-clock-exclamation" aria-hidden="true"></i>
+        </div>
+        <div class="opcion-texto">
+          <div class="opcion-titulo">
+            Lista de espera prioritaria
+            <span class="badge-urgente">Prioritario</span>
+          </div>
+          <p class="opcion-desc">Si necesita atención preferencial, complete el formulario de solicitud. La asignación depende de la disponibilidad de agenda.</p>
+        </div>
+        <i class="ti ti-chevron-right opcion-flecha" aria-hidden="true"></i>
+      </button>
+
+      <!-- Opción 3: Consulta administrativa -->
+      <button type="button" class="opcion-card opcion-3" onclick="mostrarSeccion('consulta')">
+        <div class="opcion-icono">
+          <i class="ti ti-mail" aria-hidden="true"></i>
+        </div>
+        <div class="opcion-texto">
+          <div class="opcion-titulo">Consulta o información</div>
+          <p class="opcion-desc">Envíe una consulta administrativa o solicite información general sobre la atención neurológica. Respuesta en 72 hs hábiles.</p>
+        </div>
+        <i class="ti ti-chevron-right opcion-flecha" aria-hidden="true"></i>
+      </button>
+
+    </div>
+
+    <p class="nota-pie-selector">Este portal no reemplaza la consulta médica presencial ni la atención de urgencias.</p>
+
+  </div><!-- /pantalla-selector -->
+
+
+  <!-- ============================
+       SECCIÓN: LISTA DE ESPERA PRIORITARIA
+       ============================ -->
+  <div id="seccion-espera">
+
+    <button type="button" class="btn-volver" onclick="volverSelector()">
+      <i class="ti ti-arrow-left" aria-hidden="true"></i> Volver al inicio
+    </button>
+
     <div class="section-head">
-      <i class="ti ti-user" aria-hidden="true"></i> Datos del paciente <span class="section-req">(OBLIGATORIO)</span>
+      <i class="ti ti-clock-exclamation" aria-hidden="true"></i>
+      Lista de espera prioritaria
     </div>
 
-    <label class="form-label" for="nombre">Nombre y apellido *</label>
-    <input type="text" id="nombre" name="nombre" class="form-control" required>
+    <p class="turno-standalone-intro">
+      Complete este formulario para incorporarse a la lista de espera. La asignación de turno no es inmediata y depende exclusivamente de la disponibilidad de agenda del profesional.
+    </p>
 
-    <div class="row2">
-      <div>
-        <label class="form-label" for="dni">DNI</label>
-        <input type="text" id="dni" name="dni" maxlength="12" class="form-control">
+    <form action="https://formspree.io/f/mbdebwne" method="POST" id="formEspera">
+
+      <input type="hidden" name="_subject" id="val_subject_e" value="🔴 PRIORITARIO - Solicitud lista de espera - Dr. Daniel Zuin">
+      <input type="hidden" name="_next" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
+      <input type="hidden" name="_language" value="es">
+      <input type="text" name="_gotcha" style="display:none">
+      <input type="hidden" name="tipo_formulario" value="Lista de espera prioritaria">
+      <input type="hidden" name="tipo_consulta_e" id="val_tipo_consulta_e" value="">
+      <input type="hidden" name="lista_espera" value="Sí">
+      <input type="hidden" name="Resumen" id="val_resumen_e" value="">
+
+      <!-- Datos del paciente -->
+      <div class="section-head" style="margin-top:.5rem;">
+        <i class="ti ti-user" aria-hidden="true"></i> Datos del paciente <span class="section-req">(OBLIGATORIO)</span>
       </div>
-      <div>
-        <label class="form-label" for="edad">Edad</label>
-        <input type="number" id="edad" name="edad" min="0" max="120" class="form-control">
+
+      <label class="form-label" for="nombre_e">Nombre y apellido *</label>
+      <input type="text" id="nombre_e" name="nombre" class="form-control" required>
+
+      <div class="row2">
+        <div>
+          <label class="form-label" for="dni_e">DNI</label>
+          <input type="text" id="dni_e" name="dni" maxlength="12" class="form-control">
+        </div>
+        <div>
+          <label class="form-label" for="edad_e">Edad</label>
+          <input type="number" id="edad_e" name="edad" min="0" max="120" class="form-control">
+        </div>
       </div>
-    </div>
 
-    <label class="form-label" for="tel">Teléfono *</label>
-    <input type="tel" id="tel" name="telefono" class="form-control"
-           placeholder="Ej: 2611234567"
-           pattern="[0-9]{8,15}"
-           inputmode="numeric"
-           title="Ingrese solo números, sin espacios ni guiones, sin el 0 ni el 15"
-           required>
-    <p class="form-text">Ingrese solo números, sin espacios ni guiones. No incluya el 0 ni el 15. Ejemplo: si su número es 0261-15-1234567, escriba <strong>2611234567</strong></p>
+      <label class="form-label" for="tel_e">Teléfono *</label>
+      <input type="tel" id="tel_e" name="telefono" class="form-control"
+             placeholder="Ej: 2611234567"
+             pattern="[0-9]{8,15}"
+             inputmode="numeric"
+             title="Ingrese solo números, sin espacios ni guiones"
+             required>
+      <p class="form-text">Solo números. Sin 0 ni 15. Ejemplo: <strong>2611234567</strong></p>
 
-    <label class="form-label" for="email">Correo electrónico *</label>
-    <input type="email" id="email" name="email" autocomplete="email" class="form-control" required>
+      <label class="form-label" for="email_e">Correo electrónico *</label>
+      <input type="email" id="email_e" name="email" autocomplete="email" class="form-control" required>
 
-    <label class="form-label" for="obra">Obra social / prepaga</label>
-    <select id="obra" name="obrasocial" class="form-select" onchange="toggleOtraCobertura()">
-      <option value="">Seleccione una opción</option>
-      <option>Particular</option>
-      <option>OSDE 210</option>
-      <option>OSDE 310</option>
-      <option>OSDE 410</option>
-      <option>SMG</option>
-      <option>GALENO</option>
-      <option>PAMI</option>
-      <option>DAMSU</option>
-      <option>OSEP</option>
-      <option>OTRAS</option>
-    </select>
+      <label class="form-label" for="obra_e">Obra social / prepaga</label>
+      <select id="obra_e" name="obrasocial" class="form-select" onchange="toggleOtraCobertura('e')">
+        <option value="">Seleccione una opción</option>
+        <option>Particular</option>
+        <option>OSDE 210</option>
+        <option>OSDE 310</option>
+        <option>OSDE 410</option>
+        <option>SMG</option>
+        <option>GALENO</option>
+        <option>PAMI</option>
+        <option>DAMSU</option>
+        <option>OSEP</option>
+        <option>OTRAS</option>
+      </select>
 
-    <div id="otra-cobertura-row" class="visita-hidden">
-      <label class="form-label" for="otra_cobertura">Especifique cobertura</label>
-      <input type="text" id="otra_cobertura" name="otra_cobertura" class="form-control">
-    </div>
+      <div id="otra-cobertura-row-e" class="visita-hidden">
+        <label class="form-label" for="otra_cobertura_e">Especifique cobertura</label>
+        <input type="text" id="otra_cobertura_e" name="otra_cobertura" class="form-control">
+      </div>
 
-    <!-- PACIENTE SÍ / NO -->
-    <div class="paciente-row">
-      <span class="paciente-label">¿Es paciente del Dr. Daniel R. Zuin?</span>
-      <div class="radio-group">
-        <div class="radio-btn" id="btn-si" onclick="setPaciente('Sí')">
+      <hr>
+
+      <!-- Tipo de consulta -->
+      <div class="section-head">
+        <i class="ti ti-calendar" aria-hidden="true"></i> Solicitud de turno <em style="font-size:15px;font-weight:400;text-transform:none;letter-spacing:0;color:#6c757d;">(opcional)</em>
+      </div>
+
+      <div class="tipo-consulta-row">
+        <span class="tipo-label">Tipo de consulta:</span>
+        <div class="tipo-opts">
+          <div class="tbtn" id="btn-primera-e" onclick="setTipoConsulta('e', this, 'Primera vez')">Primera vez</div>
+          <div class="tbtn" id="btn-ulterior-e" onclick="setTipoConsulta('e', this, 'Ulterior')">Ulterior</div>
+        </div>
+      </div>
+
+      <span class="lista-espera-label">¿Desea incorporarse a la lista de espera para un turno anticipado?</span>
+      <div class="radio-group" style="margin-bottom:6px;">
+        <div class="radio-btn selected" id="btn-espera-si-e">
           <i class="ti ti-check" aria-hidden="true"></i> Sí
         </div>
-        <div class="radio-btn" id="btn-no" onclick="setPaciente('No')">
+        <div class="radio-btn" id="btn-espera-no-e" onclick="setListaEsperaE('No')">
           <i class="ti ti-x" aria-hidden="true"></i> No
         </div>
       </div>
-    </div>
+      <p class="lista-espera-aclaracion">La incorporación no garantiza asignación inmediata y depende exclusivamente de la disponibilidad de agenda del profesional.</p>
 
-    <!-- ÚLTIMA VISITA (visible solo si es paciente) -->
-    <div class="visita-row visita-hidden" id="visita-row">
-      <span class="visita-label">Última visita:</span>
-      <div class="visita-opts">
-        <div class="vbtn" onclick="setVisita(this, 'Hace menos de 30 días')">Hace menos de 30 días</div>
-        <div class="vbtn" onclick="setVisita(this, 'De 3 a 6 meses')">De 3 a 6 meses</div>
-        <div class="vbtn" onclick="setVisita(this, '1 año o más')">1 año o más</div>
+      <label class="form-label" for="motivo_e">Motivo principal de consulta</label>
+      <select id="motivo_e" name="motivo" class="form-select">
+        <option value="">Seleccione una opción</option>
+        <option>Problemas cognitivos o de memoria</option>
+        <option>Cefalea</option>
+        <option>Temblor</option>
+        <option>Convulsiones</option>
+        <option>Vértigo o trastornos del equilibrio</option>
+        <option>Esclerosis múltiple</option>
+        <option>Consulta por estudios médicos</option>
+        <option>Otros</option>
+      </select>
+
+      <label class="form-label" for="otro_e">Si seleccionó "Otros", especifique</label>
+      <input type="text" id="otro_e" name="otro_motivo" class="form-control">
+
+      <label class="form-label" for="msg_e">Comentarios adicionales</label>
+      <textarea id="msg_e" name="mensaje" class="form-control" rows="4"></textarea>
+
+      <div class="whatsapp-note">
+        <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
+        <span>
+          Recuerde también gestionar su turno por WhatsApp:
+          <a href="https://wa.me/5492612085393" target="_blank">261 208-5393</a>.
+          Esta solicitud es complementaria y no reemplaza la gestión habitual de turnos.
+        </span>
       </div>
-    </div>
 
-    <hr>
+      <hr>
 
-    <!-- CONSULTA (ahora primero) -->
-    <div class="section-head">
-      <i class="ti ti-message" aria-hidden="true"></i> Consulta <span class="section-req">(OBLIGATORIO)</span>
-    </div>
-
-    <label class="form-label" for="asunto">Asunto</label>
-    <input type="text" id="asunto" name="asunto" class="form-control">
-
-    <label class="form-label" for="msg">Mensaje *</label>
-    <textarea id="msg" name="mensaje" class="form-control" rows="5" minlength="30" required></textarea>
-    <p class="form-text">Por favor describa brevemente su consulta (mínimo 30 caracteres).</p>
-
-    <!-- RESTRICCIONES -->
-    <div class="restrict-box">
-      <div class="rhead">
-        <i class="ti ti-circle-x" aria-hidden="true"></i>
-        Importante — leer antes de enviar
+      <div class="section-head">
+        <i class="ti ti-shield-check" aria-hidden="true"></i> Declaración y consentimiento
       </div>
-      <ul>
-        <li><span>No</span> se recibirán estudios médicos, imágenes, análisis clínicos ni historias clínicas.</li>
-        <li><span>No</span> se brindarán diagnósticos, segundas opiniones ni indicaciones terapéuticas.</li>
-        <li><span>No</span> se emitirán certificados, informes médicos ni constancias.</li>
-        <li><span>No</span> se confeccionarán recetas médicas.</li>
-        <li><span>No</span> se gestionarán formularios especiales ni autorizaciones.</li>
-        <li><span>No</span> se atenderán urgencias ni emergencias médicas.</li>
-      </ul>
-      <p class="rfooter">
-        Las respuestas se enviarán exclusivamente al correo informado, en un plazo de al menos <strong>72 horas hábiles</strong>.
-      </p>
-    </div>
 
-    <hr>
+      <div class="consent-box">
+        <p>Al enviar este formulario declaro haber leído y comprendido las condiciones de uso del presente canal de contacto.</p>
+        <p>Autorizo el tratamiento de los datos consignados exclusivamente para la gestión de esta solicitud. Las respuestas serán enviadas únicamente al correo electrónico informado.</p>
+      </div>
 
-    <!-- BOTÓN PARA ABRIR TURNO PRIORITARIO EN VENTANA EMERGENTE -->
-    <button type="button" class="btn-turno" data-bs-toggle="modal" data-bs-target="#modalTurno">
-      <i class="ti ti-calendar" aria-hidden="true"></i>
-      Solicitud de turno prioritario (opcional)
-    </button>
-    <div class="turno-flecha">▲</div>
-    <p class="turno-resumen" id="turnoResumenTxt">Aún no completó esta sección opcional. Toque el botón para abrirla.</p>
+      <input type="hidden" name="acepta_condiciones" value="Sí - aceptado al enviar el formulario">
 
-    <hr>
+      <p class="data-note">Los datos suministrados serán utilizados exclusivamente para responder la consulta realizada y gestionar eventuales comunicaciones relacionadas con la atención solicitada.</p>
 
-    <!-- DECLARACIÓN Y CONSENTIMIENTO -->
-    <div class="section-head">
-      <i class="ti ti-shield-check" aria-hidden="true"></i> Declaración y consentimiento
-    </div>
+      <div class="h-captcha" data-captcha="true"></div>
 
-    <div class="consent-box">
-      <p>Al enviar este formulario declaro haber leído y comprendido las condiciones de uso del presente canal de contacto.</p>
-      <p>Comprendo que este formulario está destinado exclusivamente a consultas administrativas e información general, que no constituye una consulta médica, no reemplaza la evaluación profesional presencial o por telemedicina y no debe utilizarse para urgencias o emergencias.</p>
-      <p>Autorizo el tratamiento de los datos consignados exclusivamente para la gestión de esta consulta y para eventuales comunicaciones relacionadas con la atención solicitada. Las respuestas serán enviadas únicamente al correo electrónico informado.</p>
-    </div>
+      <button type="submit" class="btn-enviar">
+        <i class="ti ti-send" aria-hidden="true"></i>
+        Enviar solicitud prioritaria
+      </button>
 
-    <input type="hidden" name="acepta_condiciones" value="Sí - aceptado al enviar el formulario">
+      <p class="consent-footnote">Al hacer clic en <strong>"Enviar solicitud prioritaria"</strong>, usted declara haber leído, comprendido y aceptado las condiciones precedentes.</p>
 
-    <p class="data-note">
-      Los datos suministrados serán utilizados exclusivamente para responder la consulta realizada y gestionar eventuales comunicaciones relacionadas con la atención solicitada.
-    </p>
+      <div class="gracias-msg">
+        <i class="ti ti-heart" aria-hidden="true"></i>
+        <span>Gracias por su contacto. Le responderemos a la brevedad.</span>
+      </div>
 
-    <button type="submit" class="btn-enviar">
-      <i class="ti ti-send" aria-hidden="true"></i>
-      Enviar consulta
+    </form>
+
+  </div><!-- /seccion-espera -->
+
+
+  <!-- ============================
+       SECCIÓN: CONSULTA + TURNO OPCIONAL
+       ============================ -->
+  <div id="seccion-consulta">
+
+    <button type="button" class="btn-volver" onclick="volverSelector()">
+      <i class="ti ti-arrow-left" aria-hidden="true"></i> Volver al inicio
     </button>
 
-    <p class="consent-footnote">
-      Al hacer clic en <strong>"Enviar consulta"</strong>, usted declara haber leído, comprendido y aceptado las condiciones precedentes.
+    <p class="intro-text">
+      Este formulario está destinado exclusivamente a consultas administrativas, solicitudes de información general y dudas relacionadas con el proceso de atención neurológica.
+      Las respuestas serán enviadas por correo electrónico en un plazo estimado de al menos <strong>72 horas hábiles</strong>.
     </p>
 
-    <div class="gracias-msg">
-      <i class="ti ti-heart" aria-hidden="true"></i>
-      <span>Gracias por su contacto. Le responderemos a la brevedad.</span>
-    </div>
+    <form action="https://formspree.io/f/mbdebwne" method="POST" id="formZuin">
 
-  </form>
+      <input type="hidden" name="_subject" id="val_subject" value="Nueva consulta web - Dr. Daniel Zuin">
+      <input type="hidden" name="_next" value="https://drzuin-beep.github.io/funcermen-DR-Zuin-contacto/gracias.html">
+      <input type="hidden" name="_language" value="es">
+      <input type="text" name="_gotcha" style="display:none">
+      <input type="hidden" name="tipo_formulario" value="Consulta administrativa">
+      <input type="hidden" name="Resumen_de_la_consulta" id="val_resumen" value="">
+      <input type="hidden" name="es_paciente" id="val_paciente" value="">
+      <input type="hidden" name="ultima_visita" id="val_visita" value="">
+      <input type="hidden" name="lista_espera_txt" id="val_lista_espera" value="No">
+      <input type="hidden" name="tipo_consulta" id="val_tipo_consulta" value="">
+      <input type="hidden" name="motivo" id="val_motivo" value="">
+      <input type="hidden" name="otro_motivo" id="val_otro_motivo" value="">
 
-</div>
-
-<!-- MODAL: TURNO PRIORITARIO -->
-<div class="modal fade" id="modalTurno" tabindex="-1" aria-labelledby="modalTurnoLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title" id="modalTurnoLabel">
-          <i class="ti ti-calendar" aria-hidden="true"></i> Solicitud de turno prioritario
-        </h2>
-        <button type="button" class="btn-close" id="btnCerrarModalTurno" aria-label="Cerrar"></button>
+      <!-- DATOS DEL PACIENTE -->
+      <div class="section-head">
+        <i class="ti ti-user" aria-hidden="true"></i> Datos del paciente <span class="section-req">(OBLIGATORIO)</span>
       </div>
-      <div class="modal-body">
+
+      <label class="form-label" for="nombre">Nombre y apellido *</label>
+      <input type="text" id="nombre" name="nombre" class="form-control" required>
+
+      <div class="row2">
+        <div>
+          <label class="form-label" for="dni">DNI</label>
+          <input type="text" id="dni" name="dni" maxlength="12" class="form-control">
+        </div>
+        <div>
+          <label class="form-label" for="edad">Edad</label>
+          <input type="number" id="edad" name="edad" min="0" max="120" class="form-control">
+        </div>
+      </div>
+
+      <label class="form-label" for="tel">Teléfono *</label>
+      <input type="tel" id="tel" name="telefono" class="form-control"
+             placeholder="Ej: 2611234567"
+             pattern="[0-9]{8,15}"
+             inputmode="numeric"
+             title="Ingrese solo números, sin espacios ni guiones, sin el 0 ni el 15"
+             required>
+      <p class="form-text">Ingrese solo números, sin espacios ni guiones. No incluya el 0 ni el 15. Ejemplo: si su número es 0261-15-1234567, escriba <strong>2611234567</strong></p>
+
+      <label class="form-label" for="email">Correo electrónico *</label>
+      <input type="email" id="email" name="email" autocomplete="email" class="form-control" required>
+
+      <label class="form-label" for="obra">Obra social / prepaga</label>
+      <select id="obra" name="obrasocial" class="form-select" onchange="toggleOtraCobertura('c')">
+        <option value="">Seleccione una opción</option>
+        <option>Particular</option>
+        <option>OSDE 210</option>
+        <option>OSDE 310</option>
+        <option>OSDE 410</option>
+        <option>SMG</option>
+        <option>GALENO</option>
+        <option>PAMI</option>
+        <option>DAMSU</option>
+        <option>OSEP</option>
+        <option>OTRAS</option>
+      </select>
+
+      <div id="otra-cobertura-row-c" class="visita-hidden">
+        <label class="form-label" for="otra_cobertura">Especifique cobertura</label>
+        <input type="text" id="otra_cobertura" name="otra_cobertura" class="form-control">
+      </div>
+
+      <!-- PACIENTE SÍ / NO -->
+      <div class="paciente-row">
+        <span class="paciente-label">¿Es paciente del Dr. Daniel R. Zuin?</span>
+        <div class="radio-group">
+          <div class="radio-btn" id="btn-si" onclick="setPaciente('Sí')">
+            <i class="ti ti-check" aria-hidden="true"></i> Sí
+          </div>
+          <div class="radio-btn" id="btn-no" onclick="setPaciente('No')">
+            <i class="ti ti-x" aria-hidden="true"></i> No
+          </div>
+        </div>
+      </div>
+
+      <!-- ÚLTIMA VISITA -->
+      <div class="visita-row visita-hidden" id="visita-row">
+        <span class="visita-label">Última visita:</span>
+        <div class="visita-opts">
+          <div class="vbtn" onclick="setVisita(this, 'Hace menos de 30 días')">Hace menos de 30 días</div>
+          <div class="vbtn" onclick="setVisita(this, 'De 3 a 6 meses')">De 3 a 6 meses</div>
+          <div class="vbtn" onclick="setVisita(this, '1 año o más')">1 año o más</div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- CONSULTA -->
+      <div class="section-head">
+        <i class="ti ti-message" aria-hidden="true"></i> Consulta <span class="section-req">(OBLIGATORIO)</span>
+      </div>
+
+      <label class="form-label" for="asunto">Asunto</label>
+      <input type="text" id="asunto" name="asunto" class="form-control">
+
+      <label class="form-label" for="msg">Mensaje *</label>
+      <textarea id="msg" name="mensaje" class="form-control" rows="5" minlength="30" required></textarea>
+      <p class="form-text">Por favor describa brevemente su consulta (mínimo 30 caracteres).</p>
+
+      <div class="restrict-box">
+        <div class="rhead">
+          <i class="ti ti-circle-x" aria-hidden="true"></i>
+          Importante — leer antes de enviar
+        </div>
+        <ul>
+          <li><span>No</span> se recibirán estudios médicos, imágenes, análisis clínicos ni historias clínicas.</li>
+          <li><span>No</span> se brindarán diagnósticos, segundas opiniones ni indicaciones terapéuticas.</li>
+          <li><span>No</span> se emitirán certificados, informes médicos ni constancias.</li>
+          <li><span>No</span> se confeccionarán recetas médicas.</li>
+          <li><span>No</span> se gestionarán formularios especiales ni autorizaciones.</li>
+          <li><span>No</span> se atenderán urgencias ni emergencias médicas.</li>
+        </ul>
+        <p class="rfooter">
+          Las respuestas se enviarán exclusivamente al correo informado, en un plazo de al menos <strong>72 horas hábiles</strong>.
+        </p>
+      </div>
+
+      <hr>
+
+      <!-- TURNO PRIORITARIO OPCIONAL (inline, sin modal) -->
+      <div class="turno-bloque">
+        <div class="turno-bloque-titulo">
+          <i class="ti ti-calendar-plus" aria-hidden="true"></i>
+          Solicitud de turno prioritario <em style="font-size:14px;font-weight:400;color:#92400e;">(opcional)</em>
+        </div>
 
         <div class="tipo-consulta-row">
-          <span class="tipo-label">Tipo de consulta: <span class="tipo-req">*</span></span>
+          <span class="tipo-label">Tipo de consulta:</span>
           <div class="tipo-opts">
-            <div class="tbtn" id="btn-primera" onclick="setTipoConsulta(this, 'Primera vez')">Primera vez</div>
-            <div class="tbtn" id="btn-ulterior" onclick="setTipoConsulta(this, 'Ulterior')">Ulterior</div>
+            <div class="tbtn" id="btn-primera-c" onclick="setTipoConsulta('c', this, 'Primera vez')">Primera vez</div>
+            <div class="tbtn" id="btn-ulterior-c" onclick="setTipoConsulta('c', this, 'Ulterior')">Ulterior</div>
           </div>
         </div>
-        <p class="tipo-error" id="tipoErrorMsg">Por favor seleccione "Primera vez" o "Ulterior" antes de guardar.</p>
 
-        <div class="lista-espera-row">
-          <span class="lista-espera-label">¿Desea incorporarse a la lista de espera para un turno anticipado?</span>
-          <div class="radio-group">
-            <div class="radio-btn" id="btn-espera-si" onclick="setListaEspera('Sí')">
-              <i class="ti ti-check" aria-hidden="true"></i> Sí
-            </div>
-            <div class="radio-btn" id="btn-espera-no" onclick="setListaEspera('No')">
-              <i class="ti ti-x" aria-hidden="true"></i> No
-            </div>
+        <span class="lista-espera-label">¿Desea incorporarse a la lista de espera para un turno anticipado?</span>
+        <div class="radio-group" style="margin-bottom:6px;">
+          <div class="radio-btn" id="btn-espera-si-c" onclick="setListaEsperaC('Sí')">
+            <i class="ti ti-check" aria-hidden="true"></i> Sí
           </div>
-          <p class="lista-espera-aclaracion">La incorporación no garantiza asignación inmediata y depende exclusivamente de la disponibilidad de agenda del profesional.</p>
+          <div class="radio-btn selected" id="btn-espera-no-c" onclick="setListaEsperaC('No')">
+            <i class="ti ti-x" aria-hidden="true"></i> No
+          </div>
         </div>
+        <p class="lista-espera-aclaracion">La incorporación no garantiza asignación inmediata y depende exclusivamente de la disponibilidad de agenda del profesional.</p>
 
-        <label class="form-label" for="motivo_modal">Motivo principal de consulta</label>
-        <select id="motivo_modal" class="form-select">
+        <label class="form-label" for="motivo_c">Motivo principal de consulta</label>
+        <select id="motivo_c" class="form-select" onchange="document.getElementById('val_motivo').value=this.value">
           <option value="">Seleccione una opción</option>
           <option>Problemas cognitivos o de memoria</option>
           <option>Cefalea</option>
@@ -722,41 +977,180 @@
           <option>Otros</option>
         </select>
 
-        <label class="form-label" for="otro_modal">Si seleccionó "Otros", especifique</label>
-        <input type="text" id="otro_modal" class="form-control">
+        <label class="form-label" for="otro_c">Si seleccionó "Otros", especifique</label>
+        <input type="text" id="otro_c" class="form-control" oninput="document.getElementById('val_otro_motivo').value=this.value">
 
         <div class="whatsapp-note">
           <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
           <span>
             Recuerde también gestionar su turno por WhatsApp:
-            <a href="https://wa.me/5492612085393" target="_blank">261 208 5393</a>.
+            <a href="https://wa.me/5492612085393" target="_blank">261 208-5393</a>.
             Esta solicitud es complementaria y no reemplaza la gestión habitual de turnos.
           </span>
         </div>
+      </div>
 
+      <hr>
+
+      <!-- DECLARACIÓN -->
+      <div class="section-head">
+        <i class="ti ti-shield-check" aria-hidden="true"></i> Declaración y consentimiento
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn-enviar" onclick="guardarTurno()">
-          <i class="ti ti-check" aria-hidden="true"></i> Guardar y cerrar
-        </button>
+
+      <div class="consent-box">
+        <p>Al enviar este formulario declaro haber leído y comprendido las condiciones de uso del presente canal de contacto.</p>
+        <p>Comprendo que este formulario está destinado exclusivamente a consultas administrativas e información general, que no constituye una consulta médica, no reemplaza la evaluación profesional presencial o por telemedicina y no debe utilizarse para urgencias o emergencias.</p>
+        <p>Autorizo el tratamiento de los datos consignados exclusivamente para la gestión de esta consulta y para eventuales comunicaciones relacionadas con la atención solicitada.</p>
       </div>
-    </div>
-  </div>
-</div>
+
+      <input type="hidden" name="acepta_condiciones" value="Sí - aceptado al enviar el formulario">
+
+      <p class="data-note">Los datos suministrados serán utilizados exclusivamente para responder la consulta realizada y gestionar eventuales comunicaciones relacionadas con la atención solicitada.</p>
+
+      <div class="h-captcha" data-captcha="true"></div>
+
+      <button type="submit" class="btn-enviar">
+        <i class="ti ti-send" aria-hidden="true"></i>
+        Enviar consulta
+      </button>
+
+      <p class="consent-footnote">Al hacer clic en <strong>"Enviar consulta"</strong>, usted declara haber leído, comprendido y aceptado las condiciones precedentes.</p>
+
+      <div class="gracias-msg">
+        <i class="ti ti-heart" aria-hidden="true"></i>
+        <span>Gracias por su contacto. Le responderemos a la brevedad.</span>
+      </div>
+
+    </form>
+
+  </div><!-- /seccion-consulta -->
+
+</div><!-- /main-box -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  function toggleOtraCobertura() {
-    var val = document.getElementById('obra').value;
-    var row = document.getElementById('otra-cobertura-row');
+
+  /* ============================
+     NAVEGACIÓN ENTRE SECCIONES
+     ============================ */
+  function mostrarSeccion(cual) {
+    document.getElementById('pantalla-selector').style.display = 'none';
+    document.getElementById('seccion-espera').style.display = 'none';
+    document.getElementById('seccion-consulta').style.display = 'none';
+    if (cual === 'espera') {
+      document.getElementById('seccion-espera').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      document.getElementById('seccion-consulta').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function volverSelector() {
+    document.getElementById('seccion-espera').style.display = 'none';
+    document.getElementById('seccion-consulta').style.display = 'none';
+    document.getElementById('pantalla-selector').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ============================
+     HELPERS COMPARTIDOS
+     ============================ */
+  function toggleOtraCobertura(sufijo) {
+    var id = sufijo === 'e' ? 'obra_e' : 'obra';
+    var rowId = 'otra-cobertura-row-' + sufijo;
+    var inputId = sufijo === 'e' ? 'otra_cobertura_e' : 'otra_cobertura';
+    var val = document.getElementById(id).value;
+    var row = document.getElementById(rowId);
     if (val === 'OTRAS') {
       row.classList.remove('visita-hidden');
     } else {
       row.classList.add('visita-hidden');
-      document.getElementById('otra_cobertura').value = '';
+      document.getElementById(inputId).value = '';
     }
   }
 
+  function setTipoConsulta(sufijo, el, val) {
+    var hiddenId = sufijo === 'e' ? 'val_tipo_consulta_e' : 'val_tipo_consulta';
+    document.getElementById(hiddenId).value = val;
+    var prefix = sufijo === 'e' ? '-e' : '-c';
+    document.querySelectorAll('#btn-primera' + prefix + ', #btn-ulterior' + prefix).forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    el.classList.add('selected');
+  }
+
+  /* ============================
+     FORMULARIO ESPERA
+     ============================ */
+  var listaEsperaE = 'Sí'; // default: sí (ya preseleccionado)
+
+  function setListaEsperaE(val) {
+    listaEsperaE = val;
+    document.getElementById('btn-espera-si-e').classList.toggle('selected', val === 'Sí');
+    document.getElementById('btn-espera-no-e').classList.toggle('selected', val === 'No');
+  }
+
+  document.getElementById('formEspera').addEventListener('submit', function(e) {
+
+    var nombre    = document.getElementById('nombre_e').value.trim();
+    var dni       = document.getElementById('dni_e').value.trim();
+    var edad      = document.getElementById('edad_e').value.trim();
+    var telefono  = document.getElementById('tel_e').value.trim();
+    var email     = document.getElementById('email_e').value.trim();
+    var obra      = document.getElementById('obra_e').value;
+    var otraCob   = document.getElementById('otra_cobertura_e').value.trim();
+    var tipo      = document.getElementById('val_tipo_consulta_e').value;
+    var motivo    = document.getElementById('motivo_e').value;
+    var otroMot   = document.getElementById('otro_e').value.trim();
+    var mensaje   = document.getElementById('msg_e').value.trim();
+
+    if (obra === 'OTRAS' && otraCob) obra = 'Otras: ' + otraCob;
+
+    var whatsappLink = '';
+    if (telefono) {
+      var digits = telefono.replace(/\D/g, '');
+      if (digits.charAt(0) === '0') digits = digits.substring(1);
+      if (digits.substring(0, 2) !== '54') digits = '549' + digits;
+      whatsappLink = 'https://wa.me/' + digits;
+    }
+
+    var lineas = [];
+    lineas.push('===== SOLICITUD DE TURNO - LISTA DE ESPERA =====');
+    lineas.push('Nombre: ' + (nombre || '-'));
+    lineas.push('Email: ' + (email || '-'));
+    lineas.push('Teléfono: ' + (telefono || '-') + (whatsappLink ? ' (WhatsApp: ' + whatsappLink + ')' : ''));
+    lineas.push('Edad: ' + (edad || '-'));
+    lineas.push('DNI: ' + (dni || '-'));
+    lineas.push('Cobertura: ' + (obra || '-'));
+    lineas.push('Tipo de consulta: ' + (tipo || '-'));
+    lineas.push('Lista de espera: SÍ ⚠️');
+    lineas.push('Motivo: ' + (motivo || '-'));
+    if (otroMot) lineas.push('Otro motivo: ' + otroMot);
+    if (mensaje) lineas.push('Comentarios: ' + mensaje);
+
+    document.getElementById('val_resumen_e').value = lineas.join('\n');
+    document.getElementById('val_subject_e').value = '🔴 PRIORITARIO - ' + (tipo ? tipo + ' - ' : '') + 'Lista de espera - Dr. Daniel Zuin';
+
+    // Envío paralelo a Web3Forms
+    try {
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
+          subject: document.getElementById('val_subject_e').value,
+          from_name: 'Formulario web - Dr. Daniel Zuin',
+          Resumen: lineas.join('\n')
+        }),
+        keepalive: true
+      }).catch(function(err) { console.log('Web3Forms:', err); });
+    } catch(e2) { console.log(e2); }
+  });
+
+  /* ============================
+     FORMULARIO CONSULTA
+     ============================ */
   function setPaciente(val) {
     document.getElementById('val_paciente').value = val;
     document.getElementById('btn-si').classList.toggle('selected', val === 'Sí');
@@ -767,193 +1161,104 @@
     } else {
       vrow.classList.add('visita-hidden');
       document.getElementById('val_visita').value = '';
-      document.querySelectorAll('.vbtn').forEach(function(b){ b.classList.remove('selected'); });
+      document.querySelectorAll('.vbtn').forEach(function(b) { b.classList.remove('selected'); });
     }
   }
 
   function setVisita(el, val) {
     document.getElementById('val_visita').value = val;
-    document.querySelectorAll('.vbtn').forEach(function(b){ b.classList.remove('selected'); });
+    document.querySelectorAll('.vbtn').forEach(function(b) { b.classList.remove('selected'); });
     el.classList.add('selected');
   }
 
-  function setListaEspera(val) {
+  function setListaEsperaC(val) {
     document.getElementById('val_lista_espera').value = val;
-    document.getElementById('btn-espera-si').classList.toggle('selected', val === 'Sí');
-    document.getElementById('btn-espera-no').classList.toggle('selected', val === 'No');
+    document.getElementById('btn-espera-si-c').classList.toggle('selected', val === 'Sí');
+    document.getElementById('btn-espera-no-c').classList.toggle('selected', val === 'No');
   }
 
-  function setTipoConsulta(el, val) {
-    document.getElementById('val_tipo_consulta').value = val;
-    document.querySelectorAll('.tbtn').forEach(function(b){ b.classList.remove('selected'); });
-    el.classList.add('selected');
-    document.getElementById('tipoErrorMsg').classList.remove('show');
-  }
-
-  // Captura SIEMPRE los valores actuales del modal (se llama al cerrar, sea como sea)
-  function capturarDatosTurno() {
-    var tipoConsulta = document.getElementById('val_tipo_consulta').value;
-    var listaEspera = document.getElementById('val_lista_espera').value;
-
-    var motivo = document.getElementById('motivo_modal').value;
-    var otroMotivo = document.getElementById('otro_modal').value;
-    document.getElementById('val_motivo').value = motivo;
-    document.getElementById('val_otro_motivo').value = otroMotivo;
-
-    var resumenEl = document.getElementById('turnoResumenTxt');
-
-    var partes = [];
-    if (tipoConsulta) partes.push(tipoConsulta);
-    if (listaEspera === 'Sí') partes.push('en lista de espera');
-    if (motivo) partes.push('motivo: ' + motivo);
-
-    if (partes.length > 0) {
-      resumenEl.textContent = 'Turno prioritario completado (' + partes.join(', ') + '). Puede editarlo tocando el botón.';
-    } else {
-      resumenEl.textContent = 'Aún no completó esta sección opcional. Toque el botón para abrirla.';
-    }
-  }
-
-  // Botón "Guardar y cerrar": exige elegir Primera vez / Ulterior antes de cerrar
-  function guardarTurno() {
-    var tipoConsulta = document.getElementById('val_tipo_consulta').value;
-    if (!tipoConsulta) {
-      document.getElementById('tipoErrorMsg').classList.add('show');
-      return; // no cierra si falta el dato obligatorio
-    }
-    var modalEl = document.getElementById('modalTurno');
-    var modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-    modalInstance.hide();
-  }
-
-  // Sin importar cómo se cierre el modal (X, click afuera, Esc, o "Guardar y cerrar"),
-  // los datos seleccionados hasta ese momento quedan registrados.
-  document.getElementById('modalTurno').addEventListener('hide.bs.modal', capturarDatosTurno);
-
-  document.getElementById('btnCerrarModalTurno').addEventListener('click', function() {
-    var modalEl = document.getElementById('modalTurno');
-    var modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-    modalInstance.hide();
-  });
-
-  // Para que el checkbox real "lista_espera" (oculto, requerido por Formspree) se incluya correctamente:
   document.getElementById('formZuin').addEventListener('submit', function() {
-    // Crea/actualiza un input hidden con el nombre original "lista_espera" para mantener compatibilidad con Formspree
-    var existing = document.getElementById('lista_espera_hidden_send');
-    if (!existing) {
-      existing = document.createElement('input');
-      existing.type = 'hidden';
-      existing.id = 'lista_espera_hidden_send';
-      existing.name = 'lista_espera';
-      this.appendChild(existing);
-    }
-    existing.value = document.getElementById('val_lista_espera').value;
+    var nombre   = document.getElementById('nombre').value.trim();
+    var dni      = document.getElementById('dni').value.trim();
+    var edad     = document.getElementById('edad').value.trim();
+    var telefono = document.getElementById('tel').value.trim();
+    var email    = document.getElementById('email').value.trim();
+    var obra     = document.getElementById('obra').value;
+    var otraCob  = document.getElementById('otra_cobertura').value.trim();
+    var paciente = document.getElementById('val_paciente').value;
+    var visita   = document.getElementById('val_visita').value;
+    var asunto   = document.getElementById('asunto').value.trim();
+    var mensaje  = document.getElementById('msg').value.trim();
+    var listaEsp = document.getElementById('val_lista_espera').value;
+    var tipo     = document.getElementById('val_tipo_consulta').value;
+    var motivo   = document.getElementById('val_motivo').value;
+    var otroMot  = document.getElementById('val_otro_motivo').value;
 
-    // Marca el asunto del correo cuando la consulta es prioritaria (lista de espera)
-    // y agrega el tipo de consulta (Primera vez / Ulterior) si fue seleccionado
-    var subjectInput = document.getElementById('val_subject');
-    var esPrioritaria = document.getElementById('val_lista_espera').value === 'Sí';
-    var tipoConsulta = document.getElementById('val_tipo_consulta').value;
-    var subjectBase = 'Nueva consulta web - Dr. Daniel Zuin';
+    if (obra === 'OTRAS' && otraCob) obra = 'Otras: ' + otraCob;
 
-    var prefijo = esPrioritaria ? '🔴 PRIORITARIO' : '';
-    if (tipoConsulta) {
-      prefijo = prefijo ? prefijo + ' - ' + tipoConsulta : tipoConsulta;
-    }
-    subjectInput.value = prefijo ? prefijo + ' - ' + subjectBase : subjectBase;
-
-    // Construye el resumen ordenado y separado por secciones para el mail
-    var f = document.getElementById('formZuin');
-    var get = function(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; };
-
-    var nombre = get('nombre');
-    var dni = get('dni');
-    var edad = get('edad');
-    var telefono = get('tel');
-    var email = get('email');
-    var obra = get('obra');
-    var otraCobertura = get('otra_cobertura');
-    if (obra === 'OTRAS' && otraCobertura) {
-      obra = 'Otras: ' + otraCobertura;
-    }
-    var esPacienteVal = document.getElementById('val_paciente').value;
-    var ultimaVisita = document.getElementById('val_visita').value;
-    var asunto = get('asunto');
-    var mensaje = get('msg');
-    var listaEsperaVal = document.getElementById('val_lista_espera').value;
-    var motivoVal = document.getElementById('val_motivo').value;
-    var otroMotivoVal = document.getElementById('val_otro_motivo').value;
-
-    // Construye el link de WhatsApp a partir del teléfono ingresado (formato Argentina)
     var whatsappLink = '';
     if (telefono) {
-      var soloDigitos = telefono.replace(/\D/g, '');
-      // Quita el 0 inicial de larga distancia si está presente
-      if (soloDigitos.charAt(0) === '0') {
-        soloDigitos = soloDigitos.substring(1);
-      }
-      // Si no tiene el código de país (54), se lo agrega junto con el 9 de celular
-      if (soloDigitos.substring(0, 2) !== '54') {
-        soloDigitos = '549' + soloDigitos;
-      }
-      whatsappLink = 'https://wa.me/' + soloDigitos;
+      var digits = telefono.replace(/\D/g, '');
+      if (digits.charAt(0) === '0') digits = digits.substring(1);
+      if (digits.substring(0, 2) !== '54') digits = '549' + digits;
+      whatsappLink = 'https://wa.me/' + digits;
     }
 
     var lineas = [];
-
     lineas.push('===== DATOS DEL PACIENTE =====');
-    lineas.push('Nombre y apellido: ' + (nombre || '-'));
+    lineas.push('Nombre: ' + (nombre || '-'));
     lineas.push('Email: ' + (email || '-'));
     lineas.push('Teléfono: ' + (telefono || '-') + (whatsappLink ? ' (WhatsApp: ' + whatsappLink + ')' : ''));
     lineas.push('Edad: ' + (edad || '-'));
-    lineas.push('Cobertura (obra social/prepaga): ' + (obra || '-'));
-    lineas.push('Tipo de consulta: ' + (tipoConsulta || 'No indicado'));
-    if (esPacienteVal === 'Sí') {
+    lineas.push('Cobertura: ' + (obra || '-'));
+    lineas.push('Tipo de consulta: ' + (tipo || 'No indicado'));
+    if (paciente === 'Sí') {
       lineas.push('¿Es paciente del Dr. Zuin?: Sí');
-      lineas.push('Última visita: ' + (ultimaVisita || 'No indicado'));
-    } else if (esPacienteVal === 'No') {
+      lineas.push('Última visita: ' + (visita || 'No indicado'));
+    } else if (paciente === 'No') {
       lineas.push('¿Es paciente del Dr. Zuin?: No');
     } else {
       lineas.push('¿Es paciente del Dr. Zuin?: No indicado');
     }
     lineas.push('DNI: ' + (dni || '-'));
     lineas.push('');
-
     lineas.push('===== MENSAJE =====');
     lineas.push('Asunto: ' + (asunto || '-'));
     lineas.push('Mensaje: ' + (mensaje || '-'));
     lineas.push('');
-
-    lineas.push('===== TURNO PRIORITARIO =====');
-    lineas.push('¿Lista de espera para turno anticipado?: ' + (listaEsperaVal === 'Sí' ? 'SÍ ⚠️' : 'No'));
-    lineas.push('Motivo principal de consulta: ' + (motivoVal || 'No indicado'));
-    if (otroMotivoVal) {
-      lineas.push('Otro motivo (detalle): ' + otroMotivoVal);
-    }
+    lineas.push('===== TURNO =====');
+    lineas.push('Lista de espera para turno anticipado: ' + (listaEsp === 'Sí' ? 'SÍ ⚠️' : 'No'));
+    lineas.push('Motivo principal: ' + (motivo || 'No indicado'));
+    if (otroMot) lineas.push('Otro motivo: ' + otroMot);
 
     document.getElementById('val_resumen').value = lineas.join('\n');
 
-    // Envío en paralelo a Web3Forms (modo prueba, además del envío normal a Formspree)
+    var subjectInput = document.getElementById('val_subject');
+    var esPrioritaria = listaEsp === 'Sí';
+    var base = 'Nueva consulta web - Dr. Daniel Zuin';
+    if (esPrioritaria) {
+      var prefijo = '🔴 PRIORITARIO' + (tipo ? ' - ' + tipo : '');
+      subjectInput.value = prefijo + ' - ' + base;
+    } else {
+      subjectInput.value = base;
+    }
+
+    // Envío paralelo a Web3Forms
     try {
-      var datosWeb3 = {
-        access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
-        subject: subjectInput.value,
-        from_name: 'Formulario web - Dr. Daniel Zuin',
-        Resumen_de_la_consulta: lineas.join('\n')
-      };
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(datosWeb3),
+        body: JSON.stringify({
+          access_key: '643eb3bc-99c6-46b9-9292-940724a904bd',
+          subject: subjectInput.value,
+          from_name: 'Formulario web - Dr. Daniel Zuin',
+          Resumen_de_la_consulta: lineas.join('\n')
+        }),
         keepalive: true
-      }).catch(function(err) {
-        console.log('Web3Forms (prueba en paralelo) no se pudo enviar:', err);
-      });
-    } catch (errWeb3) {
-      console.log('Error armando envío a Web3Forms:', errWeb3);
-    }
+      }).catch(function(err) { console.log('Web3Forms:', err); });
+    } catch(e2) { console.log(e2); }
   });
-</script>
 
+</script>
 </body>
 </html>
