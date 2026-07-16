@@ -546,6 +546,39 @@
 
   .gracias-msg i { color: #003366; font-size: 18px; }
 
+  .video-consulta-box {
+    background: #e8f4ff;
+    border: 2px solid #007cf8;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 14px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .video-consulta-box:hover { background: #d6ecff; }
+  .video-consulta-box input {
+    width: 22px;
+    height: 22px;
+    accent-color: #007cf8;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .video-consulta-box label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #003366;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.4;
+  }
+  .video-consulta-box label i { color: #007cf8; font-size: 22px; }
+
   hr { border: none; border-top: 1px solid #e2e6ea; margin: 1.25rem 0; }
 
   @media (max-width: 520px) {
@@ -753,6 +786,14 @@
 
       <label class="form-label" for="otro_e">Si seleccionó "Otros", especifique</label>
       <input type="text" id="otro_e" name="otro_motivo" class="form-control">
+
+      <div class="video-consulta-box" onclick="document.getElementById('video_consulta_e').click()">
+        <input type="checkbox" id="video_consulta_e" name="video_consulta" value="Sí">
+        <label for="video_consulta_e">
+          <i class="ti ti-video" aria-hidden="true"></i>
+          <span>Prefiero video consulta</span>
+        </label>
+      </div>
 
       <label class="form-label" for="msg_e">Comentarios adicionales</label>
       <textarea id="msg_e" name="mensaje" class="form-control" rows="4"></textarea>
@@ -977,6 +1018,14 @@
         <label class="form-label" for="otro_c">Si seleccionó "Otros", especifique</label>
         <input type="text" id="otro_c" class="form-control" oninput="document.getElementById('val_otro_motivo').value=this.value">
 
+        <div class="video-consulta-box" onclick="document.getElementById('video_consulta_c').click()">
+          <input type="checkbox" id="video_consulta_c" name="video_consulta" value="Sí">
+          <label for="video_consulta_c">
+            <i class="ti ti-video" aria-hidden="true"></i>
+            <span>Prefiero video consulta</span>
+          </label>
+        </div>
+
         <div class="whatsapp-note">
           <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
           <span>
@@ -1099,6 +1148,7 @@
     var motivo    = document.getElementById('motivo_e').value;
     var otroMot   = document.getElementById('otro_e').value.trim();
     var mensaje   = document.getElementById('msg_e').value.trim();
+    var videoConsulta = document.getElementById('video_consulta_e').checked ? 'Sí' : 'No';
 
     if (obra === 'OTRAS' && otraCob) obra = 'Otras: ' + otraCob;
 
@@ -1120,6 +1170,7 @@
     lineas.push('Cobertura: ' + (obra || '-'));
     lineas.push('Tipo de consulta: ' + (tipo || '-'));
     lineas.push('Lista de espera: SÍ ⚠️');
+    lineas.push('Video consulta: ' + videoConsulta);
     lineas.push('Motivo: ' + (motivo || '-'));
     if (otroMot) lineas.push('Otro motivo: ' + otroMot);
     if (mensaje) lineas.push('Comentarios: ' + mensaje);
@@ -1170,6 +1221,7 @@
     var asunto   = document.getElementById('asunto').value.trim();
     var mensaje  = document.getElementById('msg').value.trim();
     var listaEsp = document.getElementById('val_lista_espera').value;
+    var videoConsulta = document.getElementById('video_consulta_c').checked ? 'Sí' : 'No';
     var tipo     = document.getElementById('val_tipo_consulta').value;
     var motivo   = document.getElementById('val_motivo').value;
     var otroMot  = document.getElementById('val_otro_motivo').value;
@@ -1208,6 +1260,7 @@
     lineas.push('');
     lineas.push('===== TURNO =====');
     lineas.push('Lista de espera para turno anticipado: ' + (listaEsp === 'Sí' ? 'SÍ ⚠️' : 'No'));
+    lineas.push('Video consulta: ' + videoConsulta);
     lineas.push('Motivo principal: ' + (motivo || 'No indicado'));
     if (otroMot) lineas.push('Otro motivo: ' + otroMot);
 
