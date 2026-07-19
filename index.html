@@ -566,7 +566,7 @@
     flex-shrink: 0;
     cursor: pointer;
   }
-  .video-consulta-box label {
+  .video-consulta-box .video-consulta-text {
     font-size: 16px;
     font-weight: 600;
     color: #003366;
@@ -577,7 +577,7 @@
     gap: 8px;
     line-height: 1.4;
   }
-  .video-consulta-box label i { color: #007cf8; font-size: 22px; }
+  .video-consulta-box .video-consulta-text i { color: #007cf8; font-size: 22px; }
 
   hr { border: none; border-top: 1px solid #e2e6ea; margin: 1.25rem 0; }
 
@@ -787,13 +787,13 @@
       <label class="form-label" for="otro_e">Si seleccionó "Otros", especifique</label>
       <input type="text" id="otro_e" name="otro_motivo" class="form-control">
 
-      <div class="video-consulta-box" onclick="document.getElementById('video_consulta_e').click()">
+      <label class="video-consulta-box" for="video_consulta_e">
         <input type="checkbox" id="video_consulta_e" name="video_consulta" value="Sí">
-        <label for="video_consulta_e">
+        <span class="video-consulta-text">
           <i class="ti ti-video" aria-hidden="true"></i>
           <span>Prefiero video consulta</span>
-        </label>
-      </div>
+        </span>
+      </label>
 
       <label class="form-label" for="msg_e">Comentarios adicionales</label>
       <textarea id="msg_e" name="mensaje" class="form-control" rows="4"></textarea>
@@ -1018,13 +1018,13 @@
         <label class="form-label" for="otro_c">Si seleccionó "Otros", especifique</label>
         <input type="text" id="otro_c" class="form-control" oninput="document.getElementById('val_otro_motivo').value=this.value">
 
-        <div class="video-consulta-box" onclick="document.getElementById('video_consulta_c').click()">
+        <label class="video-consulta-box" for="video_consulta_c">
           <input type="checkbox" id="video_consulta_c" name="video_consulta" value="Sí">
-          <label for="video_consulta_c">
+          <span class="video-consulta-text">
             <i class="ti ti-video" aria-hidden="true"></i>
             <span>Prefiero video consulta</span>
-          </label>
-        </div>
+          </span>
+        </label>
 
         <div class="whatsapp-note">
           <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
